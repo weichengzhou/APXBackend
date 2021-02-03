@@ -10,6 +10,6 @@ namespace APX.Services
     {
         Task<T> Create(IParameter parameter);
 
-        Task<List<T>> FindAll();
+        Task<IEnumerable<T>> FindAll();
     }
 }

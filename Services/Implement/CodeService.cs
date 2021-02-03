@@ -49,7 +49,7 @@ namespace APX.Services
         }
 
 
-        public async Task<List<Code>> FindAll()
+        public async Task<IEnumerable<Code>> FindAll()
         {
             return await this._unitOfWork.CodeRepository.FindAll();
         }

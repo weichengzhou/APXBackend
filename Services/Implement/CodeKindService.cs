@@ -44,7 +44,7 @@ namespace APX.Services
         }
 
 
-        public async Task<List<CodeKind>> FindAll()
+        public async Task<IEnumerable<CodeKind>> FindAll()
         {
             return await this._unitOfWork.CodeKindRepository.FindAll();
         }

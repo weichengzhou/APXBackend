@@ -30,14 +30,14 @@ namespace APX.Repositories
                 .FirstOrDefaultAsync();
         }
         
-        public async Task<List<T>> Find(Expression<Func<T, bool>> predicate)
+        public async Task<IEnumerable<T>> Find(Expression<Func<T, bool>> predicate)
         {
             return await this.Context.Set<T>()
                 .Where(predicate)
                 .ToListAsync();
         }
 
-        public async Task<List<T>> FindAll()
+        public async Task<IEnumerable<T>> FindAll()
         {
             return await this.Context.Set<T>().ToListAsync();
         }

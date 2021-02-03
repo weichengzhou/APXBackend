@@ -55,7 +55,7 @@ namespace APX.Services
 
 
 
-        public async Task<List<Event>> FindAll()
+        public async Task<IEnumerable<Event>> FindAll()
         {
             return await this._unitOfWork.EventRepository.FindAll();
         }

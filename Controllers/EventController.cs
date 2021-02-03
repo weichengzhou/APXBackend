@@ -2,6 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
 using APXBackend.Controllers.Response;
@@ -48,8 +49,8 @@ namespace APXBackend.Controllers
         [Produces("application/json")]
         public async Task<IActionResult> FindAllEvents()
         {
-            List<Event> allEvents = await this._service.FindAll();
-            string message = String.Format("Find {0} records.", allEvents.Count);
+            IEnumerable<Event> allEvents = await this._service.FindAll();
+            string message = String.Format("Find {0} records.", allEvents.Count());
             return StatusCode(200, new SucceedResponse(message, allEvents));
         }
 

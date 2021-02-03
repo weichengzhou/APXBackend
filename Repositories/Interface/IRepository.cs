@@ -12,9 +12,9 @@ namespace APX.Repositories
 
         Task<T> FindFirst(Expression<Func<T, bool>> predicate);
 
-        Task<List<T>> Find(Expression<Func<T, bool>> predicate);
+        Task<IEnumerable<T>> Find(Expression<Func<T, bool>> predicate);
 
-        Task<List<T>> FindAll();
+        Task<IEnumerable<T>> FindAll();
 
         void Update(T entity);
 

@@ -45,7 +45,7 @@ namespace APX.Services
         }
 
 
-        public async Task<List<Token>> FindAll()
+        public async Task<IEnumerable<Token>> FindAll()
         {
             return await this._unitOfWork.TokenRepository.FindAll();
         }

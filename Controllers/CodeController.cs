@@ -2,6 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
 using APXBackend.Controllers.Response;
@@ -46,8 +47,8 @@ namespace APXBackend.Controllers
         [Produces("application/json")]
         public async Task<IActionResult> FindAllCodes()
         {
-            List<Code> allCodes = await this._service.FindAll();
-            string message = String.Format("Find {0} records.", allCodes.Count);
+            IEnumerable<Code> allCodes = await this._service.FindAll();
+            string message = String.Format("Find {0} records.", allCodes.Count());
             return StatusCode(200, new SucceedResponse(message, allCodes));
         }
 
