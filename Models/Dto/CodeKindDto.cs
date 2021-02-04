@@ -11,4 +11,9 @@ namespace APX.Models.Dto
     {
         public string Name { get; set; }
     }
+
+    
+    public class UpdateCodeKindDto : CodeKindDto
+    {
+    }
 }

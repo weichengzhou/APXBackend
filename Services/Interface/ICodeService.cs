@@ -15,7 +15,7 @@ namespace APX.Services
 
         Task<Code> FindById(string id);
 
-        Task<Code> UpdateById(string id, CodeDto codeDto);
+        Task<Code> UpdateById(string id, UpdateCodeDto codeDto);
 
         Task<bool> IsExistById(string id);
     }

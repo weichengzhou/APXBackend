@@ -5,7 +5,7 @@ using Validator.Fluent;
 
 namespace APX.Services.Validator
 {
-    public interface IValidatable
+    public interface IValidator
     {
         bool IsValidated();
         

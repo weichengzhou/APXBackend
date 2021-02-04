@@ -63,4 +63,12 @@ namespace APX.Services.Validator
                 .MaxLength(10);
         }
     }
+
+
+    public class UpdateCodeKindDtoValidator : CodeKindDtoValidator
+    {
+        public UpdateCodeKindDtoValidator(UpdateCodeKindDto dto) : base(dto)
+        {
+        }
+    }
 }

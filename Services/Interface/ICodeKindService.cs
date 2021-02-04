@@ -15,7 +15,7 @@ namespace APX.Services
 
         Task<CodeKind> FindByName(string name);
 
-        Task<CodeKind> UpdateByName(string name, CodeKindDto kindDto);
+        Task<CodeKind> UpdateByName(string name, UpdateCodeKindDto kindDto);
 
         Task<bool> IsExistByName(string name);
     }

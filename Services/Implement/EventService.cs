@@ -26,7 +26,7 @@ namespace APX.Services
 
         public async Task<Event> Create(CreateEventDto eventDto)
         {
-            CreateEventDtoValidator validator = new CreateEventDtoValidator(eventDto);
+            IValidator validator = ValidatorFactory.CreateEventDtoValidator(eventDto);
             if(!validator.IsValidated())
                 throw(new InputValidatedError(validator.GetErrors()));
 
@@ -62,7 +62,7 @@ namespace APX.Services
         public async Task<Event> UpdateBySeq(string seq, UpdateEventDto eventDto)
         {
             Event findEvent = await this.FindBySeq(seq);
-            UpdateEventDtoValidator validator = new UpdateEventDtoValidator(eventDto);
+            IValidator validator = ValidatorFactory.UpdateEventDtoValidator(eventDto);
             if(!validator.IsValidated())
                 throw(new InputValidatedError(validator.GetErrors()));
             

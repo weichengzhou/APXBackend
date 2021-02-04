@@ -88,4 +88,12 @@ namespace APX.Services.Validator
                 MaxLength(20);
         }
     }
+
+
+    public class UpdateCodeDtoValidator : CodeDtoValidator
+    {
+        public UpdateCodeDtoValidator(UpdateCodeDto dto) : base(dto)
+        {
+        }
+    }
 }

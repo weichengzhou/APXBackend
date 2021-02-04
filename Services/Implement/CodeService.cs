@@ -26,7 +26,7 @@ namespace APX.Services
 
         public async Task<Code> Create(CreateCodeDto codeDto)
         {
-            CreateCodeDtoValidator validator = new CreateCodeDtoValidator(codeDto);
+            IValidator validator = ValidatorFactory.CreateCodeDtoValidator(codeDto);
             if(!validator.IsValidated())
                 throw(new InputValidatedError(validator.GetErrors()));
             else if(await this.IsExistById(codeDto.Id))
@@ -63,10 +63,10 @@ namespace APX.Services
         }
 
 
-        public async Task<Code> UpdateById(string id, CodeDto codeDto)
+        public async Task<Code> UpdateById(string id, UpdateCodeDto codeDto)
         {
             Code findCode = await this.FindById(id);
-            CodeDtoValidator validator = new CodeDtoValidator(codeDto);
+            IValidator validator = ValidatorFactory.UpdateCodeDtoValidator(codeDto);
             if(!validator.IsValidated())
                 throw(new InputValidatedError(validator.GetErrors()));
             if(codeDto.Kind != null &

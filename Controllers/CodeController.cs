@@ -72,7 +72,7 @@ namespace APXBackend.Controllers
         [HttpPut("api/v1.0/code/{id}")]
         [Produces("application/json")]
         public async Task<IActionResult> UpdateCodeBy([FromRoute]string id,
-            [FromBody]CodeDto codeDto)
+            [FromBody]UpdateCodeDto codeDto)
         {
             try
             {

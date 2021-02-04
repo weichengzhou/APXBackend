@@ -71,7 +71,7 @@ namespace APXBackend.Controllers
         [HttpPut("api/v1.0/codeKind/{name}")]
         [Produces("application/json")]
         public async Task<IActionResult> UpdateCodeKind([FromRoute]string name,
-            [FromBody]CodeKindDto dto)
+            [FromBody]UpdateCodeKindDto dto)
         {
             try
             {

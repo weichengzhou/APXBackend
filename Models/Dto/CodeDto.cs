@@ -14,4 +14,9 @@ namespace APX.Models.Dto
     {
         public string Id { get; set; }
     }
+
+
+    public class UpdateCodeDto : CodeDto
+    {
+    }
 }
