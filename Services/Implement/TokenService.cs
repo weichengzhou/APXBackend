@@ -3,36 +3,37 @@ using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-using APX.Services.UnitOfWork;
-using APX.Services.Parameter;
-using APX.Services.Exceptions;
+using AutoMapper;
+
 using APX.Models;
+using APX.Models.Dto;
+using APX.Services.UnitOfWork;
+using APX.Services.Validator;
+using APX.Services.Exceptions;
+
 
 namespace APX.Services
 {
     public class TokenService : ITokenService
     {
         private IUnitOfWork _unitOfWork;
+        private IMapper _mapper;
 
-        public TokenService(IUnitOfWork unitOfWork)
+        public TokenService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             this._unitOfWork = unitOfWork;
+            this._mapper = mapper;
         }
 
 
-        public async Task<Token> Create(IParameter parameter)
+        public async Task<Token> Create(CreateTokenDto tokenDto)
         {
-            CreatedTokenParameter para = (CreatedTokenParameter)parameter;
-            if(!para.IsValidated())
-                throw(new InputValidatedError(para.GetErrors()));
+            CreateTokenDtoValidator validator = new CreateTokenDtoValidator(tokenDto);
+            if(!validator.IsValidated())
+                throw(new InputValidatedError(validator.GetErrors()));
 
-            Token createdToken = new Token{
-                Body = para.Body,
-                CreatedUser = para.CreatedUser,
-                CreatedDate = DateTime.Now,
-                UpdatedUser = para.CreatedUser,
-                UpdatedDate = DateTime.Now
-            };
+            Token createdToken = this._mapper.Map<Token>(tokenDto);
+            
             await this._unitOfWork.TokenRepository.Create(createdToken);
             await this._unitOfWork.SaveChanges();
             return createdToken;

@@ -2,9 +2,12 @@
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
+using AutoMapper;
+
 using APX.Models;
+using APX.Models.Dto;
 using APX.Services.UnitOfWork;
-using APX.Services.Parameter;
+using APX.Services.Validator;
 using APX.Services.Exceptions;
 
 namespace APX.Services
@@ -12,25 +15,25 @@ namespace APX.Services
     public class CodeKindService : ICodeKindService
     {
         private IUnitOfWork _unitOfWork;
+        private IMapper _mapper;
 
-        public CodeKindService(IUnitOfWork unitOfWork)
+        public CodeKindService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             this._unitOfWork = unitOfWork;
+            this._mapper = mapper;
         }
 
 
-        public async Task<CodeKind> Create(IParameter parameter)
+        public async Task<CodeKind> Create(CreateCodeKindDto kindDto)
         {
-            CreatedCodeKindParameter para = (CreatedCodeKindParameter)parameter;
-            if(!para.IsValidated())
-                throw(new InputValidatedError(para.GetErrors()));
-            else if(await this.IsExistByName(para.Name))
-                throw(new CodeKindIsExistError(para.Name));
+            CreateCodeKindDtoValidator validator = new CreateCodeKindDtoValidator(kindDto);
+            if(!validator.IsValidated())
+                throw(new InputValidatedError(validator.GetErrors()));
+            else if(await this.IsExistByName(kindDto.Name))
+                throw(new CodeKindIsExistError(kindDto.Name));
 
-            CodeKind createdKind = new CodeKind{
-                Name = para.Name,
-                NameT = para.NameT
-            };
+            CodeKind createdKind = this._mapper.Map<CodeKind>(kindDto);
+            
             await this._unitOfWork.CodeKindRepository.Create(createdKind);
             await this._unitOfWork.SaveChanges();
             return createdKind;
@@ -58,14 +61,15 @@ namespace APX.Services
         }
 
 
-        public async Task<CodeKind> UpdateByName(string name, IParameter parameter)
+        public async Task<CodeKind> UpdateByName(string name, CodeKindDto kindDto)
         {
-            UpdatedCodeKindParameter para = (UpdatedCodeKindParameter)parameter;
-            if(!para.IsValidated())
-                throw(new InputValidatedError(para.GetErrors()));
+            CodeKind findKind= await this.FindByName(name);
+            CodeKindDtoValidator validator = new CodeKindDtoValidator(kindDto);
+            if(!validator.IsValidated())
+                throw(new InputValidatedError(validator.GetErrors()));
 
-            CodeKind updatedKind = await this.FindByName(name);
-            updatedKind.NameT = para.NameT;
+            CodeKind updatedKind = this._mapper.Map(kindDto, findKind);
+
             this._unitOfWork.CodeKindRepository.Update(updatedKind);
             await this._unitOfWork.SaveChanges();
             return updatedKind;

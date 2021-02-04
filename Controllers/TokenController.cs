@@ -6,10 +6,11 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
 using APXBackend.Controllers.Response;
-using APX.Services;
-using APX.Services.Parameter;
-using APX.Services.Exceptions;
 using APX.Models;
+using APX.Models.Dto;
+using APX.Services;
+using APX.Services.Exceptions;
+
 
 namespace APXBackend.Controllers
 {
@@ -28,12 +29,11 @@ namespace APXBackend.Controllers
 
         [HttpPost("api/v1.0/token")]
         [Produces("application/json")]
-        public async Task<IActionResult> CreateToken(
-            [FromBody]CreatedTokenParameter parameter)
+        public async Task<IActionResult> CreateToken([FromBody]CreateTokenDto tokenDto)
         {
             try
             {
-                Token createdToken = await this._service.Create(parameter);
+                Token createdToken = await this._service.Create(tokenDto);
                 string message = "Token is created.";
                 return StatusCode(200, new SucceedResponse(message, createdToken));
             }

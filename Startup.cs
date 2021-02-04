@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
 using Microsoft.EntityFrameworkCore;
 
+
+using AutoMapper;
+
 // Use APX Context
-using APX.Models;
+using APX.Models.Context;
 using APX.Repositories;
 using APX.Services;
 using APX.Services.UnitOfWork;
@@ -51,6 +53,9 @@ namespace APXBackend
             {
                 options.JsonSerializerOptions.Converters.Add(new DateTimeConverter("yyyy'-'MM'-'dd' 'HH':'mm':'ss"));
             });
+            // Add AutoMapper : Mapping DTO and Entities
+            // dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection
+            services.AddAutoMapper(typeof(Startup));
             services.AddMvc(options => options.EnableEndpointRouting = false);
         }
 

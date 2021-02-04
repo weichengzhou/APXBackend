@@ -1,11 +1,13 @@
 
-using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
+using AutoMapper;
+
 using APX.Models;
+using APX.Models.Dto;
 using APX.Services.UnitOfWork;
-using APX.Services.Parameter;
+using APX.Services.Validator;
 using APX.Services.Exceptions;
 
 namespace APX.Services
@@ -13,35 +15,23 @@ namespace APX.Services
     public class EventService : IEventService
     {
         private IUnitOfWork _unitOfWork;
+        private IMapper _mapper;
 
-        public EventService(IUnitOfWork unitOfWork)
+        public EventService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             this._unitOfWork = unitOfWork;
+            this._mapper = mapper;
         }
 
 
-        public async Task<Event> Create(IParameter parameter)
+        public async Task<Event> Create(CreateEventDto eventDto)
         {
-            CreatedEventParameter para = (CreatedEventParameter)parameter;
-            if(!para.IsValidated())
-                throw(new InputValidatedError(para.GetErrors()));
+            CreateEventDtoValidator validator = new CreateEventDtoValidator(eventDto);
+            if(!validator.IsValidated())
+                throw(new InputValidatedError(validator.GetErrors()));
 
-            Event createdEvent = new Event{
-                APISystem = para.APISystem,
-                APIName = para.APIName,
-                APIVersion = para.APIVersion,
-                Source = para.Source,
-                Name = para.Name,
-                Time = para.GetTime(),
-                Flow = para.Flow,
-                IPAddress = para.IPAddress,
-                Status = para.Status,
-                Desc = para.Desc,
-                CreatedUser = para.CreatedUser,
-                CreatedDate = DateTime.Now,
-                UpdatedUser = para.CreatedUser,
-                UpdatedDate = DateTime.Now
-            };
+            Event createdEvent = this._mapper.Map<Event>(eventDto);
+
             await this._unitOfWork.EventRepository.Create(createdEvent);
             await this._unitOfWork.SaveChanges();
             return createdEvent;
@@ -69,25 +59,15 @@ namespace APX.Services
         }
 
 
-        public async Task<Event> UpdateBySeq(string seq, IParameter parameter)
+        public async Task<Event> UpdateBySeq(string seq, UpdateEventDto eventDto)
         {
-            UpdatedEventParameter para = (UpdatedEventParameter)parameter;
-            if(!para.IsValidated())
-                throw(new InputValidatedError(para.GetErrors()));
-
-            Event updatedEvent = await this.FindBySeq(seq);
-            updatedEvent.APISystem = para.APISystem ?? updatedEvent.APISystem;
-            updatedEvent.APIName = para.APIName ?? updatedEvent.APIName;
-            updatedEvent.APIVersion = para.APIVersion ?? updatedEvent.APIVersion;
-            updatedEvent.Source = para.Source ?? updatedEvent.Source;
-            updatedEvent.Name = para.Name ?? updatedEvent.Name;
-            updatedEvent.Time = para.GetTime() ?? updatedEvent.Time;
-            updatedEvent.Flow = para.Flow ?? updatedEvent.Flow;
-            updatedEvent.IPAddress = para.IPAddress ?? updatedEvent.IPAddress;
-            updatedEvent.Status = para.Status ?? updatedEvent.Status;
-            updatedEvent.Desc = para.Desc ?? updatedEvent.Desc;
-            updatedEvent.UpdatedUser = para.UpdatedUser;
-            updatedEvent.UpdatedDate = DateTime.Now;
+            Event findEvent = await this.FindBySeq(seq);
+            UpdateEventDtoValidator validator = new UpdateEventDtoValidator(eventDto);
+            if(!validator.IsValidated())
+                throw(new InputValidatedError(validator.GetErrors()));
+            
+            Event updatedEvent = this._mapper.Map(eventDto, findEvent);
+            
             this._unitOfWork.EventRepository.Update(updatedEvent);
             await this._unitOfWork.SaveChanges();
             return updatedEvent;

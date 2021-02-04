@@ -6,10 +6,10 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
 using APXBackend.Controllers.Response;
-using APX.Services;
-using APX.Services.Parameter;
-using APX.Services.Exceptions;
 using APX.Models;
+using APX.Models.Dto;
+using APX.Services;
+using APX.Services.Exceptions;
 
 namespace APXBackend.Controllers
 {
@@ -28,11 +28,11 @@ namespace APXBackend.Controllers
         [HttpPost("api/v1.0/codeKind")]
         [Produces("application/json")]
         public async Task<IActionResult> CreateCodeKind(
-            [FromBody] CreatedCodeKindParameter parameter)
+            [FromBody] CreateCodeKindDto dto)
         {
             try
             {
-                CodeKind createdKind = await this._service.Create(parameter);
+                CodeKind createdKind = await this._service.Create(dto);
                 string message = "CodeKind is created.";
                 return StatusCode(200, new SucceedResponse(message, createdKind));
             }
@@ -68,14 +68,14 @@ namespace APXBackend.Controllers
         }
 
 
-        [HttpPatch("api/v1.0/codeKind/{name}")]
+        [HttpPut("api/v1.0/codeKind/{name}")]
         [Produces("application/json")]
         public async Task<IActionResult> UpdateCodeKind([FromRoute]string name,
-            [FromBody]UpdatedCodeKindParameter parameter)
+            [FromBody]CodeKindDto dto)
         {
             try
             {
-                CodeKind updatedKind = await this._service.UpdateByName(name, parameter);
+                CodeKind updatedKind = await this._service.UpdateByName(name, dto);
                 string message = String.Format("Update codeKind name {0}.", name);
                 return StatusCode(200, new SucceedResponse(message, updatedKind));
             }

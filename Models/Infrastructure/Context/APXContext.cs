@@ -1,7 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 
-namespace APX.Models
+namespace APX.Models.Context
 {
     public class APXContext : DbContext
     {

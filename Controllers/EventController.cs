@@ -6,8 +6,9 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
 using APXBackend.Controllers.Response;
+
+using APX.Models.Dto;
 using APX.Services;
-using APX.Services.Parameter;
 using APX.Services.Exceptions;
 using APX.Models;
 
@@ -29,12 +30,11 @@ namespace APXBackend.Controllers
 
         [HttpPost("api/v1.0/event/")]
         [Produces("application/json")]
-        public async Task<IActionResult> CreateEvent(
-            [FromBody]CreatedEventParameter parameter)
+        public async Task<IActionResult> CreateEvent([FromBody]CreateEventDto eventDto)
         {
             try
             {
-                Event createdEvent = await this._service.Create(parameter);
+                Event createdEvent = await this._service.Create(eventDto);
                 string message = "Event is created.";
                 return StatusCode(200, new SucceedResponse(message, createdEvent));
             }
@@ -72,14 +72,14 @@ namespace APXBackend.Controllers
         }
 
 
-        [HttpPatch("api/v1.0/event/{seq}")]
+        [HttpPut("api/v1.0/event/{seq}")]
         [Produces("application/json")]
         public async Task<IActionResult> UpdateEvent([FromRoute]string seq,
-            [FromBody]UpdatedEventParameter parameter)
+            [FromBody]UpdateEventDto eventDto)
         {
             try
             {
-                Event updatedEvent = await this._service.UpdateBySeq(seq, parameter);
+                Event updatedEvent = await this._service.UpdateBySeq(seq, eventDto);
                 string message = String.Format("Update event seq {0}.", seq);
                 return StatusCode(200, new SucceedResponse(message, updatedEvent));
             }

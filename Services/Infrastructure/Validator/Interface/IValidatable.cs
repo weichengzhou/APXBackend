@@ -3,11 +3,12 @@ using System.Collections.Generic;
 
 using Validator.Fluent;
 
-namespace APX.Services.Parameter
+namespace APX.Services.Validator
 {
-    public interface IParameter
+    public interface IValidatable
     {
         bool IsValidated();
+        
         List<ValidationError> GetErrors();
     }
 }

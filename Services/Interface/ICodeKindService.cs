@@ -1,16 +1,21 @@
 
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 using APX.Models;
-using APX.Services.Parameter;
+using APX.Models.Dto;
 
 namespace APX.Services
 {
-    public interface ICodeKindService : IService<CodeKind>
+    public interface ICodeKindService
     {
+        Task<CodeKind> Create(CreateCodeKindDto kindDto);
+
+        Task<IEnumerable<CodeKind>> FindAll();
+
         Task<CodeKind> FindByName(string name);
 
-        Task<CodeKind> UpdateByName(string name, IParameter parameter);
+        Task<CodeKind> UpdateByName(string name, CodeKindDto kindDto);
 
         Task<bool> IsExistByName(string name);
     }

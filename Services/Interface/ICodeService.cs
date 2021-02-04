@@ -1,16 +1,21 @@
 
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 using APX.Models;
-using APX.Services.Parameter;
+using APX.Models.Dto;
 
 namespace APX.Services
 {
-    public interface ICodeService : IService<Code>
+    public interface ICodeService
     {
+        Task<Code> Create(CreateCodeDto codeDto);
+
+        Task<IEnumerable<Code>> FindAll();
+
         Task<Code> FindById(string id);
 
-        Task<Code> UpdateById(string id, IParameter parameter);
+        Task<Code> UpdateById(string id, CodeDto codeDto);
 
         Task<bool> IsExistById(string id);
     }

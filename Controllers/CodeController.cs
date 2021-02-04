@@ -6,10 +6,10 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
 using APXBackend.Controllers.Response;
-using APX.Services;
-using APX.Services.Parameter;
-using APX.Services.Exceptions;
 using APX.Models;
+using APX.Models.Dto;
+using APX.Services;
+using APX.Services.Exceptions;
 
 namespace APXBackend.Controllers
 {
@@ -27,12 +27,11 @@ namespace APXBackend.Controllers
 
         [HttpPost("api/v1.0/code")]
         [Produces("application/json")]
-        public async Task<IActionResult> CreateCode(
-            [FromBody]CreatedCodeParameter parameter)
+        public async Task<IActionResult> CreateCode([FromBody]CreateCodeDto codeDto)
         {
             try
             {
-                Code createdCode = await this._service.Create(parameter);
+                Code createdCode = await this._service.Create(codeDto);
                 string message = "Code is created.";
                 return StatusCode(200, new SucceedResponse(message, createdCode));
             }
@@ -70,14 +69,14 @@ namespace APXBackend.Controllers
         }
 
 
-        [HttpPatch("api/v1.0/code/{id}")]
+        [HttpPut("api/v1.0/code/{id}")]
         [Produces("application/json")]
         public async Task<IActionResult> UpdateCodeBy([FromRoute]string id,
-            [FromBody]UpdatedCodeParameter parameter)
+            [FromBody]CodeDto codeDto)
         {
             try
             {
-                Code updatedCode = await this._service.UpdateById(id, parameter);
+                Code updatedCode = await this._service.UpdateById(id, codeDto);
                 string message = String.Format("Update code id {0}.", id);
                 return StatusCode(200, new SucceedResponse(message, updatedCode));
             }

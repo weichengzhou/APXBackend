@@ -2,9 +2,12 @@
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
+using AutoMapper;
+
 using APX.Models;
+using APX.Models.Dto;
 using APX.Services.UnitOfWork;
-using APX.Services.Parameter;
+using APX.Services.Validator;
 using APX.Services.Exceptions;
 
 namespace APX.Services
@@ -12,31 +15,28 @@ namespace APX.Services
     public class CodeService : ICodeService
     {
         private IUnitOfWork _unitOfWork;
+        private IMapper _mapper;
 
-        public CodeService(IUnitOfWork unitOfWork)
+        public CodeService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             this._unitOfWork = unitOfWork;
+            this._mapper = mapper;
         }
 
 
-        public async Task<Code> Create(IParameter parameter)
+        public async Task<Code> Create(CreateCodeDto codeDto)
         {
-            CreatedCodeParameter para = (CreatedCodeParameter)parameter;
-            if(!para.IsValidated())
-                throw(new InputValidatedError(para.GetErrors()));
-            else if(await this.IsExistById(para.Id))
-                throw(new CodeIsExistError(para.Id));
+            CreateCodeDtoValidator validator = new CreateCodeDtoValidator(codeDto);
+            if(!validator.IsValidated())
+                throw(new InputValidatedError(validator.GetErrors()));
+            else if(await this.IsExistById(codeDto.Id))
+                throw(new CodeIsExistError(codeDto.Id));
             else if(!await this._unitOfWork.CodeKindRepository
-                .IsExistByName(para.Kind))
-                throw(new CodeKindNotFoundError(para.Kind));
+                .IsExistByName(codeDto.Kind))
+                throw(new CodeKindNotFoundError(codeDto.Kind));
 
-            Code createdCode = new Code{
-                Id = para.Id,
-                Kind = para.Kind,
-                SortOrder = para.SortOrder,
-                NameT = para.NameT,
-                Content = para.Content
-            };
+            Code createdCode = this._mapper.Map<Code>(codeDto);
+            
             await this._unitOfWork.CodeRepository.Create(createdCode);
             await this._unitOfWork.SaveChanges();
             return createdCode;
@@ -63,20 +63,18 @@ namespace APX.Services
         }
 
 
-        public async Task<Code> UpdateById(string id, IParameter parameter)
+        public async Task<Code> UpdateById(string id, CodeDto codeDto)
         {
-            UpdatedCodeParameter para = (UpdatedCodeParameter)parameter;
-            if(!para.IsValidated())
-                throw(new InputValidatedError(para.GetErrors()));
-            if(para.Kind != null &
-                !await this._unitOfWork.CodeKindRepository.IsExistByName(para.Kind))
-                throw(new CodeKindNotFoundError(para.Kind));
+            Code findCode = await this.FindById(id);
+            CodeDtoValidator validator = new CodeDtoValidator(codeDto);
+            if(!validator.IsValidated())
+                throw(new InputValidatedError(validator.GetErrors()));
+            if(codeDto.Kind != null &
+                !await this._unitOfWork.CodeKindRepository.IsExistByName(codeDto.Kind))
+                throw(new CodeKindNotFoundError(codeDto.Kind));
 
-            Code updatedCode = await this.FindById(id);
-            updatedCode.Kind = para.Kind ?? updatedCode.Kind;
-            updatedCode.SortOrder = para.SortOrder ?? updatedCode.SortOrder;
-            updatedCode.NameT = para.NameT ?? updatedCode.NameT;
-            updatedCode.Content = para.Content ?? updatedCode.Content;
+            Code updatedCode = this._mapper.Map(codeDto, findCode);
+            
             this._unitOfWork.CodeRepository.Update(updatedCode);
             await this._unitOfWork.SaveChanges();
             return updatedCode;
