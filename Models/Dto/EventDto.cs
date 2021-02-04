@@ -22,17 +22,9 @@ namespace APX.Models.Dto
         public string Status { get; set; }
 
         public string Desc { get; set; }
-    }
 
-
-    public class CreateEventDto : EventDto
-    {
         public string CreatedUser { get; set; }
-    }
 
-
-    public class UpdateEventDto : EventDto
-    {
         public string UpdatedUser { get; set; }
     }
 }

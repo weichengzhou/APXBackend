@@ -1,4 +1,5 @@
 
+using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
@@ -24,13 +25,15 @@ namespace APX.Services
         }
 
 
-        public async Task<Event> Create(CreateEventDto eventDto)
+        public async Task<Event> Create(EventDto eventDto)
         {
             IValidator validator = new CreateEventDtoValidator(eventDto);
             if(!validator.IsValidated())
                 throw(new InputValidatedError(validator.GetErrors()));
 
             Event createdEvent = this._mapper.Map<Event>(eventDto);
+            createdEvent.UpdatedUser = createdEvent.CreatedUser;
+            createdEvent.CreatedDate = DateTime.Now;
 
             await this._unitOfWork.EventRepository.Create(createdEvent);
             await this._unitOfWork.SaveChanges();
@@ -59,9 +62,10 @@ namespace APX.Services
         }
 
 
-        public async Task<Event> UpdateBySeq(string seq, UpdateEventDto eventDto)
+        public async Task<Event> UpdateBySeq(string seq, EventDto eventDto)
         {
             Event findEvent = await this.FindBySeq(seq);
+            eventDto.CreatedUser = findEvent.CreatedUser;
             IValidator validator = new UpdateEventDtoValidator(eventDto);
             if(!validator.IsValidated())
                 throw(new InputValidatedError(validator.GetErrors()));

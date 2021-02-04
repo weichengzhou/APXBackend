@@ -26,13 +26,15 @@ namespace APX.Services
         }
 
 
-        public async Task<Token> Create(CreateTokenDto tokenDto)
+        public async Task<Token> Create(TokenDto tokenDto)
         {
             IValidator validator = new CreateTokenDtoValidator(tokenDto);
             if(!validator.IsValidated())
                 throw(new InputValidatedError(validator.GetErrors()));
 
             Token createdToken = this._mapper.Map<Token>(tokenDto);
+            createdToken.UpdatedUser = createdToken.CreatedUser;
+            createdToken.CreatedDate = DateTime.Now;
             
             await this._unitOfWork.TokenRepository.Create(createdToken);
             await this._unitOfWork.SaveChanges();

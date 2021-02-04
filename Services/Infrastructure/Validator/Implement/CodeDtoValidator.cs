@@ -21,6 +21,7 @@ namespace APX.Services.Validator
 
         protected override void Validate()
         {
+            this.ValidateId();
             this.ValidateKind();
             this.ValidateSortOrder();
             this.ValidateNameT();
@@ -31,6 +32,15 @@ namespace APX.Services.Validator
         public override List<ValidationError> GetErrors()
         {
             return this._validator.Errors;
+        }
+
+
+        protected void ValidateId()
+        {
+            this._validator.SetArg("Code.Id", this._dto.Id)
+                .NotNull()
+                .NotBlank().
+                MaxLength(20);
         }
 
 
@@ -61,39 +71,6 @@ namespace APX.Services.Validator
         {
             this._validator.SetArg("Code.Content", this._dto.Content)
                 .MaxLength(50);
-        }
-    }
-
-
-    public class CreateCodeDtoValidator : CodeDtoValidator
-    {
-        public CreateCodeDtoValidator(CreateCodeDto dto) : base(dto)
-        {
-        }
-
-
-        protected override void Validate()
-        {
-            base.Validate();
-            this.ValidateId();
-        }
-
-
-        protected void ValidateId()
-        {
-            this._validator.SetArg("Code.Id",
-                ((CreateCodeDto)this._dto).Id)
-                .NotNull()
-                .NotBlank().
-                MaxLength(20);
-        }
-    }
-
-
-    public class UpdateCodeDtoValidator : CodeDtoValidator
-    {
-        public UpdateCodeDtoValidator(UpdateCodeDto dto) : base(dto)
-        {
         }
     }
 }

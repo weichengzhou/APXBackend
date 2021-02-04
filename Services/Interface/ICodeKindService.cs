@@ -9,13 +9,13 @@ namespace APX.Services
 {
     public interface ICodeKindService
     {
-        Task<CodeKind> Create(CreateCodeKindDto kindDto);
+        Task<CodeKind> Create(CodeKindDto kindDto);
 
         Task<IEnumerable<CodeKind>> FindAll();
 
         Task<CodeKind> FindByName(string name);
 
-        Task<CodeKind> UpdateByName(string name, UpdateCodeKindDto kindDto);
+        Task<CodeKind> UpdateByName(string name, CodeKindDto kindDto);
 
         Task<bool> IsExistByName(string name);
     }

@@ -9,7 +9,7 @@ namespace APX.Services
 {
     public interface ITokenService
     {
-        Task<Token> Create(CreateTokenDto tokenDto);
+        Task<Token> Create(TokenDto tokenDto);
 
         Task<IEnumerable<Token>> FindAll();
 

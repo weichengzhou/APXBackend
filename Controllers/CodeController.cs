@@ -27,7 +27,7 @@ namespace APXBackend.Controllers
 
         [HttpPost("api/v1.0/code")]
         [Produces("application/json")]
-        public async Task<IActionResult> CreateCode([FromBody]CreateCodeDto codeDto)
+        public async Task<IActionResult> CreateCode([FromBody]CodeDto codeDto)
         {
             try
             {
@@ -72,7 +72,7 @@ namespace APXBackend.Controllers
         [HttpPut("api/v1.0/code/{id}")]
         [Produces("application/json")]
         public async Task<IActionResult> UpdateCodeBy([FromRoute]string id,
-            [FromBody]UpdateCodeDto codeDto)
+            [FromBody]CodeDto codeDto)
         {
             try
             {

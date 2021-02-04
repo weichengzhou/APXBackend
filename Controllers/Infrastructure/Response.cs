@@ -1,5 +1,5 @@
 /*
-Base response for api.
+Basic response for api.
 Success : True or False
 Message
 Result : API response corresponse object here.

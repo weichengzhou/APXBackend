@@ -40,7 +40,7 @@ namespace APX.Services.Validator
 
     public class CreateTokenDtoValidator : TokenDtoValidator
     {
-        public CreateTokenDtoValidator(CreateTokenDto dto) : base(dto)
+        public CreateTokenDtoValidator(TokenDto dto) : base(dto)
         {
         }
 
@@ -54,8 +54,7 @@ namespace APX.Services.Validator
 
         protected void ValidateCreatedUser()
         {
-            this._validator.SetArg("Token.CreatedUser",
-                ((CreateTokenDto)this._dto).CreatedUser)
+            this._validator.SetArg("Token.CreatedUser", this._dto.CreatedUser)
                 .NotNull()
                 .NotBlank()
                 .MaxLength(50);

@@ -122,7 +122,7 @@ namespace APX.Services.Validator
 
     public class CreateEventDtoValidator : EventDtoValidator
     {
-        public CreateEventDtoValidator(CreateEventDto dto) : base(dto)
+        public CreateEventDtoValidator(EventDto dto) : base(dto)
         {
         }
 
@@ -136,8 +136,7 @@ namespace APX.Services.Validator
 
         protected void ValidateCreatedUser()
         {
-            this._validator.SetArg("Event.CreatedUser",
-                ((CreateEventDto)this._dto).CreatedUser)
+            this._validator.SetArg("Event.CreatedUser", this._dto.CreatedUser)
                 .NotNull()
                 .NotBlank()
                 .MaxLength(50);
@@ -147,7 +146,7 @@ namespace APX.Services.Validator
 
     public class UpdateEventDtoValidator : EventDtoValidator
     {
-        public UpdateEventDtoValidator(UpdateEventDto dto) : base(dto)
+        public UpdateEventDtoValidator(EventDto dto) : base(dto)
         {
         }
 
@@ -161,8 +160,7 @@ namespace APX.Services.Validator
 
         protected void ValidateUpdateUser()
         {
-            this._validator.SetArg("Event.UpdatedUser",
-                ((UpdateEventDto)this._dto).UpdatedUser)
+            this._validator.SetArg("Event.UpdatedUser", this._dto.UpdatedUser)
                 .NotNull()
                 .NotBlank()
                 .MaxLength(50);

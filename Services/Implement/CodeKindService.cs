@@ -24,9 +24,9 @@ namespace APX.Services
         }
 
 
-        public async Task<CodeKind> Create(CreateCodeKindDto kindDto)
+        public async Task<CodeKind> Create(CodeKindDto kindDto)
         {
-            IValidator validator = new CreateCodeKindDtoValidator(kindDto);
+            IValidator validator = new CodeKindDtoValidator(kindDto);
             if(!validator.IsValidated())
                 throw(new InputValidatedError(validator.GetErrors()));
             else if(await this.IsExistByName(kindDto.Name))
@@ -61,11 +61,11 @@ namespace APX.Services
         }
 
 
-        public async Task<CodeKind> UpdateByName(string name,
-            UpdateCodeKindDto kindDto)
+        public async Task<CodeKind> UpdateByName(string name, CodeKindDto kindDto)
         {
             CodeKind findKind= await this.FindByName(name);
-            IValidator validator = new UpdateCodeKindDtoValidator(kindDto);
+            kindDto.Name = name.PadRight(10);
+            IValidator validator = new CodeKindDtoValidator(kindDto);
             if(!validator.IsValidated())
                 throw(new InputValidatedError(validator.GetErrors()));
 

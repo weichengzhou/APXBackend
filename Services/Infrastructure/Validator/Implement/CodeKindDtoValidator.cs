@@ -22,6 +22,7 @@ namespace APX.Services.Validator
 
         protected override void Validate()
         {
+            this.ValidateName();
             this.ValidateNameT();
         }
 
@@ -32,43 +33,19 @@ namespace APX.Services.Validator
         }
 
 
-        public void ValidateNameT()
-        {
-            this._validator.SetArg("CodeKind.NameT", this._dto.NameT)
-                .MaxLength(20);
-        }
-    }
-
-
-    public class CreateCodeKindDtoValidator : CodeKindDtoValidator
-    {
-        public CreateCodeKindDtoValidator(CreateCodeKindDto dto) : base(dto)
-        {
-        }
-
-
-        protected override void Validate()
-        {
-            base.Validate();
-            this.ValidateName();
-        }
-
-
         protected void ValidateName()
         {
-            this._validator.SetArg("CodeKind.Name",
-                ((CreateCodeKindDto)this._dto).Name)
+            this._validator.SetArg("CodeKind.Name", this._dto.Name)
                 .NotNull()
                 .NotBlank()
                 .MaxLength(10);
         }
-    }
 
 
-    public class UpdateCodeKindDtoValidator : CodeKindDtoValidator
-    {
-        public UpdateCodeKindDtoValidator(UpdateCodeKindDto dto) : base(dto)
+        public void ValidateNameT()
         {
+            this._validator.SetArg("CodeKind.NameT", this._dto.NameT)
+                .MaxLength(20);
         }
     }
 }

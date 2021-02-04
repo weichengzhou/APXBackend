@@ -30,7 +30,7 @@ namespace APXBackend.Controllers
 
         [HttpPost("api/v1.0/event/")]
         [Produces("application/json")]
-        public async Task<IActionResult> CreateEvent([FromBody]CreateEventDto eventDto)
+        public async Task<IActionResult> CreateEvent([FromBody]EventDto eventDto)
         {
             try
             {
@@ -75,7 +75,7 @@ namespace APXBackend.Controllers
         [HttpPut("api/v1.0/event/{seq}")]
         [Produces("application/json")]
         public async Task<IActionResult> UpdateEvent([FromRoute]string seq,
-            [FromBody]UpdateEventDto eventDto)
+            [FromBody]EventDto eventDto)
         {
             try
             {

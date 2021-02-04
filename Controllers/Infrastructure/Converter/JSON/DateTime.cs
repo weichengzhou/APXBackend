@@ -4,6 +4,8 @@ using System.Text.Json.Serialization;
 
 namespace APX.Controllers.Converter.JSON
 {
+    /* DateTime converter in JSON request/response.
+    */
     public class DateTimeConverter : JsonConverter<DateTime>
     {
         public string DateTimeFormat { get; private set; }

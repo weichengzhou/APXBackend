@@ -9,14 +9,14 @@ namespace APX.Services
 {
     public interface IEventService
     {
-        Task<Event> Create(CreateEventDto eventDto);
+        Task<Event> Create(EventDto eventDto);
 
         Task<IEnumerable<Event>> FindAll();
 
 
         Task<Event> FindBySeq(string seq);
 
-        Task<Event> UpdateBySeq(string seq, UpdateEventDto parameter);
+        Task<Event> UpdateBySeq(string seq, EventDto parameter);
 
         Task<bool> IsExistBySeq(string seq);
     }

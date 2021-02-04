@@ -29,7 +29,7 @@ namespace APXBackend.Controllers
 
         [HttpPost("api/v1.0/token")]
         [Produces("application/json")]
-        public async Task<IActionResult> CreateToken([FromBody]CreateTokenDto tokenDto)
+        public async Task<IActionResult> CreateToken([FromBody]TokenDto tokenDto)
         {
             try
             {
