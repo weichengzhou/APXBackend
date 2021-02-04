@@ -28,7 +28,7 @@ namespace APX.Services
 
         public async Task<Token> Create(CreateTokenDto tokenDto)
         {
-            IValidator validator = ValidatorFactory.CreateTokenDtoValidator(tokenDto);
+            IValidator validator = new CreateTokenDtoValidator(tokenDto);
             if(!validator.IsValidated())
                 throw(new InputValidatedError(validator.GetErrors()));
 
