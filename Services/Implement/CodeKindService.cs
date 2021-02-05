@@ -64,7 +64,7 @@ namespace APX.Services
         public async Task<CodeKind> UpdateByName(string name, CodeKindDto kindDto)
         {
             CodeKind findKind= await this.FindByName(name);
-            kindDto.Name = name.PadRight(10);
+            kindDto.Name = name;
             IValidator validator = new CodeKindDtoValidator(kindDto);
             if(!validator.IsValidated())
                 throw(new InputValidatedError(validator.GetErrors()));
