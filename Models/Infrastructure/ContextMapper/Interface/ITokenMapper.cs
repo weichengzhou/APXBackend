@@ -1,7 +1,6 @@
 
 namespace APX.Models.Context.Mapper
 {
-    // Map fields to table `Token`.
     public interface ITokenMapper : IContextMapper
     {
         void MapSEQ();
