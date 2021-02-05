@@ -70,8 +70,7 @@ namespace APX.Services
             IValidator validator = new CodeDtoValidator(codeDto);
             if(!validator.IsValidated())
                 throw(new InputValidatedError(validator.GetErrors()));
-            if(codeDto.Kind != null &
-                !await this._unitOfWork.CodeKindRepository.IsExistByName(codeDto.Kind))
+            if(!await this._unitOfWork.CodeKindRepository.IsExistByName(codeDto.Kind))
                 throw(new CodeKindNotFoundError(codeDto.Kind));
 
             Code updatedCode = this._mapper.Map(codeDto, findCode);

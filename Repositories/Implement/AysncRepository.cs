@@ -10,46 +10,46 @@ namespace APX.Repositories
 {
     public class AsyncRepository<T> : IRepository<T> where T : class
     {
-        private DbContext Context { get; set; }
+        private DbContext _context;
 
         public AsyncRepository(DbContext context)
         {
-            this.Context = context;
+            this._context = context;
         }
 
 
         public async Task Create(T entity)
         {
-            await this.Context.Set<T>().AddAsync(entity);
+            await this._context.Set<T>().AddAsync(entity);
         }
 
         public async Task<T> FindFirst(Expression<Func<T, bool>> predicate)
         {
-            return await this.Context.Set<T>()
+            return await this._context.Set<T>()
                 .Where(predicate)
                 .FirstOrDefaultAsync();
         }
         
         public async Task<IEnumerable<T>> Find(Expression<Func<T, bool>> predicate)
         {
-            return await this.Context.Set<T>()
+            return await this._context.Set<T>()
                 .Where(predicate)
                 .ToListAsync();
         }
 
         public async Task<IEnumerable<T>> FindAll()
         {
-            return await this.Context.Set<T>().ToListAsync();
+            return await this._context.Set<T>().ToListAsync();
         }
 
         public void Update(T entity)
         {
-            this.Context.Set<T>().Update(entity);
+            this._context.Set<T>().Update(entity);
         }
 
         public void Remove(T entity)
         {
-            this.Context.Set<T>().Remove(entity);
+            this._context.Set<T>().Remove(entity);
         }
     }
 }

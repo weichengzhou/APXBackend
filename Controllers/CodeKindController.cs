@@ -25,7 +25,7 @@ namespace APXBackend.Controllers
 
         # region api v1.0
 
-        [HttpPost("api/v1.0/codeKind")]
+        [HttpPost("api/v1.0/codekind")]
         [Produces("application/json")]
         public async Task<IActionResult> CreateCodeKind([FromBody] CodeKindDto dto)
         {
@@ -41,7 +41,7 @@ namespace APXBackend.Controllers
             }
         }
 
-        [HttpGet("api/v1.0/codeKinds")]
+        [HttpGet("api/v1.0/codekinds")]
         [Produces("application/json")]
         public async Task<IActionResult> FindAllCodeKinds()
         {
@@ -50,7 +50,7 @@ namespace APXBackend.Controllers
             return StatusCode(200, new SucceedResponse(message, allKinds));
         }
 
-        [HttpGet("api/v1.0/codeKind/{name}")]
+        [HttpGet("api/v1.0/codekind/{name}")]
         [Produces("application/json")]
         public async Task<IActionResult> FindCodeKind([FromRoute]string name)
         {
@@ -67,7 +67,7 @@ namespace APXBackend.Controllers
         }
 
 
-        [HttpPut("api/v1.0/codeKind/{name}")]
+        [HttpPut("api/v1.0/codekind/{name}")]
         [Produces("application/json")]
         public async Task<IActionResult> UpdateCodeKind([FromRoute]string name,
             [FromBody]CodeKindDto dto)
