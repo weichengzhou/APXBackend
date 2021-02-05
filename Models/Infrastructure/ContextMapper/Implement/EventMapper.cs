@@ -2,37 +2,37 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace APX.Models.Context.Creator
+namespace APX.Models.Context.Mapper
 {
-    public class EventCreator : IEventCreator
+    public class EventMapper : IEventMapper
     {
         private EntityTypeBuilder<Event> _builder;
 
-        public EventCreator(EntityTypeBuilder<Event> builder)
+        public EventMapper(EntityTypeBuilder<Event> builder)
         {
             this._builder = builder;
         }
 
 
-        public void Create()
+        public void Map()
         {
             this.HasKey();
             this.SetTableName();
-            this.CreateSEQ();
-            this.CreateAPISystem();
-            this.CreateAPIName();
-            this.CreateAPIVersion();
-            this.CreateSource();
-            this.CreateName();
-            this.CreateTime();
-            this.CreateFlow();
-            this.CreateIPAddress();
-            this.CreateStatus();
-            this.CreateDesc();
-            this.CreateCreatedUser();
-            this.CreateCreatedDate();
-            this.CreateUpdatedUser();
-            this.CreateUpdatedDate();
+            this.MapSEQ();
+            this.MapAPISystem();
+            this.MapAPIName();
+            this.MapAPIVersion();
+            this.MapSource();
+            this.MapName();
+            this.MapTime();
+            this.MapFlow();
+            this.MapIPAddress();
+            this.MapStatus();
+            this.MapDesc();
+            this.MapCreatedUser();
+            this.MapCreatedDate();
+            this.MapUpdatedUser();
+            this.MapUpdatedDate();
         }
 
 
@@ -46,13 +46,13 @@ namespace APX.Models.Context.Creator
             this._builder.ToTable("tbAPX00002");
         }
 
-        public void CreateSEQ()
+        public void MapSEQ()
         {   
             this._builder.Property(e => e.SEQ)
                 .HasColumnName("eventSEQ");
         }
 
-        public void CreateAPISystem()
+        public void MapAPISystem()
         {
             this._builder.Property(e => e.APISystem)
                 .HasColumnName("APISystem")
@@ -60,7 +60,7 @@ namespace APX.Models.Context.Creator
                 .IsRequired();
         }
 
-        public void CreateAPIName()
+        public void MapAPIName()
         {
             this._builder.Property(e => e.APIName)
                 .HasColumnName("API")
@@ -68,14 +68,14 @@ namespace APX.Models.Context.Creator
                 .IsRequired();
         }
 
-        public void CreateAPIVersion()
+        public void MapAPIVersion()
         {
             this._builder.Property(e => e.APIVersion)
                 .HasColumnName("APIVersion")
                 .HasMaxLength(8);
         }
 
-        public void CreateSource()
+        public void MapSource()
         {
             this._builder.Property(e => e.Source)
                 .HasColumnName("eventSource")
@@ -83,21 +83,21 @@ namespace APX.Models.Context.Creator
                 .IsRequired();
         }
 
-        public void CreateName()
+        public void MapName()
         {
             this._builder.Property(e => e.Name)
                 .HasColumnName("eventName")
                 .HasMaxLength(64);
         }
     
-        public void CreateTime()
+        public void MapTime()
         {
             this._builder.Property(e => e.Time)
                 .HasColumnName("eventTime")
                 .IsRequired();
         }
 
-        public void CreateFlow()
+        public void MapFlow()
         {
             this._builder.Property(e => e.Flow)
                 .HasColumnName("eventFlow")
@@ -105,28 +105,28 @@ namespace APX.Models.Context.Creator
                 .IsRequired();
         }
 
-        public void CreateIPAddress()
+        public void MapIPAddress()
         {
             this._builder.Property(e => e.IPAddress)
                 .HasColumnName("eventIPAddress")
                 .HasMaxLength(20);
         }
 
-        public void CreateStatus()
+        public void MapStatus()
         {
             this._builder.Property(e => e.Status)
                 .HasColumnName("eventStatus")
                 .HasMaxLength(255);
         }
 
-        public void CreateDesc()
+        public void MapDesc()
         {
             this._builder.Property(e => e.Desc)
                 .HasColumnName("eventDESC")
                 .HasMaxLength(255);
         }
 
-        public void CreateCreatedUser()
+        public void MapCreatedUser()
         {
             this._builder.Property(e => e.CreatedUser)
                 .HasColumnName("CRE_USRID")
@@ -134,14 +134,14 @@ namespace APX.Models.Context.Creator
                 .IsRequired();
         }
 
-        public void CreateCreatedDate()
+        public void MapCreatedDate()
         {
             this._builder.Property(e => e.CreatedDate)
                 .HasColumnName("CRE_DT")
                 .IsRequired();
         }
 
-        public void CreateUpdatedUser()
+        public void MapUpdatedUser()
         {
             this._builder.Property(e => e.UpdatedUser)
                 .HasColumnName("UPD_USRID")
@@ -149,7 +149,7 @@ namespace APX.Models.Context.Creator
                 .IsRequired();
         }
 
-        public void CreateUpdatedDate()
+        public void MapUpdatedDate()
         {
             this._builder.Property(e => e.UpdatedDate)
                 .HasColumnName("UPD_DT")

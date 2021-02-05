@@ -1,27 +1,27 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace APX.Models.Context.Creator
+namespace APX.Models.Context.Mapper
 {
-    public class CodeCreator : ICodeCreator
+    public class CodeMapper : ICodeMapper
     {
         private EntityTypeBuilder<Code> _builder;
 
-        public CodeCreator(EntityTypeBuilder<Code> builder)
+        public CodeMapper(EntityTypeBuilder<Code> builder)
         {
             this._builder = builder;
         }
 
 
-        public void Create()
+        public void Map()
         {
             this.HasKey();
             this.SetTableName();
-            this.CreateId();
-            this.CreateKind();
-            this.CreateSortOrder();
-            this.CreateNameT();
-            this.CreateContent();
+            this.MapId();
+            this.MapKind();
+            this.MapSortOrder();
+            this.MapNameT();
+            this.MapContent();
         }
 
 
@@ -37,7 +37,7 @@ namespace APX.Models.Context.Creator
         }
 
 
-        public void CreateId()
+        public void MapId()
         {
             this._builder.Property(e => e.Id)
                 .HasColumnName("CODE_ID")
@@ -46,7 +46,7 @@ namespace APX.Models.Context.Creator
         }
 
 
-        public void CreateKind()
+        public void MapKind()
         {
             this._builder.Property(e => e.Kind)
                 .HasColumnName("CODE_KIND")
@@ -55,7 +55,7 @@ namespace APX.Models.Context.Creator
         }
 
 
-        public void CreateSortOrder()
+        public void MapSortOrder()
         {
             this._builder.Property(e => e.SortOrder)
                 .HasColumnName("SORT_ORDER")
@@ -63,7 +63,7 @@ namespace APX.Models.Context.Creator
         }
 
 
-        public void CreateNameT()
+        public void MapNameT()
         {
             this._builder.Property(e => e.NameT)
                 .HasColumnName("CODE_T")
@@ -71,7 +71,7 @@ namespace APX.Models.Context.Creator
         }
 
 
-        public void CreateContent()
+        public void MapContent()
         {
             this._builder.Property(e => e.Content)
                 .HasColumnName("CODE_CONTENT")

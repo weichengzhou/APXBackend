@@ -2,24 +2,24 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace APX.Models.Context.Creator
+namespace APX.Models.Context.Mapper
 {
-    public class CodeKindCreator : ICodeKindCreator
+    public class CodeKindMapper : ICodeKindMapper
     {
         private EntityTypeBuilder<CodeKind> _builder;
 
-        public CodeKindCreator(EntityTypeBuilder<CodeKind> builder)
+        public CodeKindMapper(EntityTypeBuilder<CodeKind> builder)
         {
             this._builder = builder;
         }
 
 
-        public void Create()
+        public void Map()
         {
             this.HasKey();
             this.SetTableName();
-            this.CreateName();
-            this.CreateNameT();
+            this.MapName();
+            this.MapNameT();
         }
 
 
@@ -35,7 +35,7 @@ namespace APX.Models.Context.Creator
         }
 
 
-        public void CreateName()
+        public void MapName()
         {
             this._builder.Property(e => e.Name)
                 .HasColumnName("CODE_KIND")
@@ -44,7 +44,7 @@ namespace APX.Models.Context.Creator
         }
 
 
-        public void CreateNameT()
+        public void MapNameT()
         {
             this._builder.Property(e => e.NameT)
                 .HasColumnName("CODE_KIND_T")

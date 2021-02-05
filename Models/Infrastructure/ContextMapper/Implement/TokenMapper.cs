@@ -2,28 +2,28 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace APX.Models.Context.Creator
+namespace APX.Models.Context.Mapper
 {
-    public class TokenCreator : ITokenCreator
+    public class TokenMapper : ITokenMapper
     {
         private EntityTypeBuilder<Token> _builder;
 
-        public TokenCreator(EntityTypeBuilder<Token> builder)
+        public TokenMapper(EntityTypeBuilder<Token> builder)
         {
             this._builder = builder;
         }
 
 
-        public void Create()
+        public void Map()
         {
             this.HasKey();
             this.SetTableName();
-            this.CreateSEQ();
-            this.CreateBody();
-            this.CreateCreatedUser();
-            this.CreateCreatedDate();
-            this.CreateUpdatedUser();
-            this.CreateUpdatedDate();
+            this.MapSEQ();
+            this.MapBody();
+            this.MapCreatedUser();
+            this.MapCreatedDate();
+            this.MapUpdatedUser();
+            this.MapUpdatedDate();
         }
 
 
@@ -39,21 +39,21 @@ namespace APX.Models.Context.Creator
         }
 
 
-        public void CreateSEQ()
+        public void MapSEQ()
         {
             this._builder.Property(e => e.SEQ)
                 .HasColumnName("Token_SEQ");
         }
 
 
-        public void CreateBody()
+        public void MapBody()
         {
             this._builder.Property(e => e.Body)
                 .HasColumnName("TK_Body");
         }
 
 
-        public void CreateCreatedUser()
+        public void MapCreatedUser()
         {
             this._builder.Property(e => e.CreatedUser)
                 .HasColumnName("CRE_USRID")
@@ -62,7 +62,7 @@ namespace APX.Models.Context.Creator
         }
 
 
-        public void CreateCreatedDate()
+        public void MapCreatedDate()
         {
             this._builder.Property(e => e.CreatedDate)
                 .HasColumnName("CRE_DT")
@@ -70,7 +70,7 @@ namespace APX.Models.Context.Creator
         }
 
 
-        public void CreateUpdatedUser()
+        public void MapUpdatedUser()
         {
             this._builder.Property(e => e.UpdatedUser)
                 .HasColumnName("UPD_USRID")
@@ -79,7 +79,7 @@ namespace APX.Models.Context.Creator
         }
 
 
-        public void CreateUpdatedDate()
+        public void MapUpdatedDate()
         {
             this._builder.Property(e => e.UpdatedDate)
                 .HasColumnName("UPD_DT")
