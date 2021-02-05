@@ -5,12 +5,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 
 using AutoMapper;
 
 // Use APX Context
 using APX.Models.Context;
+using APX.Models.Context.Creator;
 using APX.Repositories;
 using APX.Services;
 using APX.Services.UnitOfWork;
@@ -32,20 +34,13 @@ namespace APXBackend
         {
             var connection = this.Configuration.GetConnectionString("DefaultConnection");
             // DI Repository
-            services.AddScoped<IEventRepository, EventRepository>();
-            services.AddScoped<ICodeKindRepository, CodeKindRepository>();
-            services.AddScoped<ICodeRepository, CodeRepository>();
-            services.AddScoped<IEventRepository, EventRepository>();
-            services.AddScoped<ITokenRepository, TokenRepository>();
+            this.AddRepositories(services);
             // DI Unit Of Work
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            this.AddUnitOfWork(services);
             // DI Service
-            services.AddScoped<IEventService, EventService>();
-            services.AddScoped<ITokenService, TokenService>();
-            services.AddScoped<ICodeKindService, CodeKindService>();
-            services.AddScoped<ICodeService, CodeService>();
+            this.AddServices(services);
             // DI DbContext
-            services.AddScoped<DbContext, APXContext>();
+            this.AddDbContext(services);
             services.AddDbContext<APXContext>(
                 options => options.UseSqlServer(connection));
             // Change DateTime convert format
@@ -58,6 +53,38 @@ namespace APXBackend
             services.AddAutoMapper(typeof(Startup));
             services.AddMvc(options => options.EnableEndpointRouting = false);
         }
+
+
+        private void AddRepositories(IServiceCollection services)
+        {
+            services.AddScoped<IEventRepository, EventRepository>();
+            services.AddScoped<ICodeKindRepository, CodeKindRepository>();
+            services.AddScoped<ICodeRepository, CodeRepository>();
+            services.AddScoped<IEventRepository, EventRepository>();
+            services.AddScoped<ITokenRepository, TokenRepository>();
+        }
+
+
+        private void AddUnitOfWork(IServiceCollection services)
+        {
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+        }
+
+
+        private void AddServices(IServiceCollection services)
+        {
+            services.AddScoped<IEventService, EventService>();
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<ICodeKindService, CodeKindService>();
+            services.AddScoped<ICodeService, CodeService>();
+        }
+
+
+        private void AddDbContext(IServiceCollection services)
+        {
+            services.AddScoped<DbContext, APXContext>();
+        }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
