@@ -29,6 +29,7 @@ namespace APX.Services
             IValidator validator = new CodeKindDtoValidator(kindDto);
             if(!validator.IsValidated())
                 throw(new InputValidatedError(validator.GetErrors()));
+            // Check name of CodeKind is not exist.
             else if(await this.IsExistByName(kindDto.Name))
                 throw(new CodeKindIsExistError(kindDto.Name));
 
@@ -55,6 +56,7 @@ namespace APX.Services
 
         public async Task<CodeKind> FindByName(string name)
         {
+            // Check CodeKind is exist.
             if(!await this.IsExistByName(name))
                 throw(new CodeKindNotFoundError(name));
             return await this._unitOfWork.CodeKindRepository.FindByName(name);
@@ -64,7 +66,7 @@ namespace APX.Services
         public async Task<CodeKind> UpdateByName(string name, CodeKindDto kindDto)
         {
             CodeKind findKind= await this.FindByName(name);
-            kindDto.Name = name.PadRight(10);
+            kindDto.Name = name;
             IValidator validator = new CodeKindDtoValidator(kindDto);
             if(!validator.IsValidated())
                 throw(new InputValidatedError(validator.GetErrors()));

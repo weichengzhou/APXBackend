@@ -10,7 +10,8 @@ namespace APX.Services.Profile
     {
         public ServiceProfile()
         {
-            this.CreateMap<CodeKindDto, CodeKind>();
+            this.CreateMap<CodeKindDto, CodeKind>()
+                .ForMember(s => s.Name, d => d.MapFrom(a => a.Name.PadRight(10)));
             this.CreateMap<CodeDto, Code>();
             this.CreateMap<EventDto, Event>()
                 .ForMember(s => s.UpdatedDate, d => d.MapFrom(a => DateTime.Now));
