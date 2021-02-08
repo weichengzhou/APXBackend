@@ -4,6 +4,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace APX.Models.Context.Mapper
 {
+    /* Usage:
+       TokenMapper mapper = new TokenMapper(builder);
+       mapper.Map();
+    */
     public class TokenMapper : ITokenMapper
     {
         private EntityTypeBuilder<Token> _builder;

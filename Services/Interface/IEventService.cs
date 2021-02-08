@@ -13,7 +13,6 @@ namespace APX.Services
 
         Task<IEnumerable<Event>> FindAll();
 
-
         Task<Event> FindBySeq(string seq);
 
         Task<Event> UpdateBySeq(string seq, EventDto parameter);

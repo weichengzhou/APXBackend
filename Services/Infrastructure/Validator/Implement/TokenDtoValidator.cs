@@ -52,9 +52,33 @@ namespace APX.Services.Validator
         }
 
 
-        protected void ValidateCreatedUser()
+        private void ValidateCreatedUser()
         {
             this._validator.SetArg("Token.CreatedUser", this._dto.CreatedUser)
+                .NotNull()
+                .NotBlank()
+                .MaxLength(50);
+        }
+    }
+
+
+    public class UpdateTokenDtoValidator : TokenDtoValidator
+    {
+        public UpdateTokenDtoValidator(TokenDto dto) : base(dto)
+        {
+        }
+
+
+        protected override void Validate()
+        {
+            base.Validate();
+            this.ValidateUpdatedUser();
+        }
+
+
+        private void ValidateUpdatedUser()
+        {
+            this._validator.SetArg("Token.UpdatedUser", this._dto.UpdatedUser)
                 .NotNull()
                 .NotBlank()
                 .MaxLength(50);

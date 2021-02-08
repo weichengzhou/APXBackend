@@ -3,6 +3,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace APX.Models.Context.Mapper
 {
+    /* Usage:
+       CodeMapper mapper = new CodeMapper(builder);
+       mapper.Map();
+    */
     public class CodeMapper : ICodeMapper
     {
         private EntityTypeBuilder<Code> _builder;
@@ -13,6 +17,7 @@ namespace APX.Models.Context.Mapper
         }
 
 
+        // Map all fields in Code.
         public void Map()
         {
             this.HasKey();

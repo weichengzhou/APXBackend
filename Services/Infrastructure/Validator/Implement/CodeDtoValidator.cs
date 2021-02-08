@@ -9,8 +9,8 @@ namespace APX.Services.Validator
 {
     public class CodeDtoValidator : AbstractValidator
     {
-        protected CodeDto _dto;
-        protected StringValidator _validator;
+        private CodeDto _dto;
+        private StringValidator _validator;
 
         public CodeDtoValidator(CodeDto dto)
         {
@@ -35,7 +35,7 @@ namespace APX.Services.Validator
         }
 
 
-        protected void ValidateId()
+        private void ValidateId()
         {
             this._validator.SetArg("Code.Id", this._dto.Id)
                 .NotNull()
@@ -44,7 +44,7 @@ namespace APX.Services.Validator
         }
 
 
-        protected void ValidateKind()
+        private void ValidateKind()
         {
             this._validator.SetArg("Code.Kind", this._dto.Kind)
                 .NotNull()
@@ -53,21 +53,21 @@ namespace APX.Services.Validator
         }
 
 
-        protected void ValidateSortOrder()
+        private void ValidateSortOrder()
         {
             this._validator.SetArg("Code.SortOrder", this._dto.SortOrder)
                 .MaxLength(7);
         }
 
 
-        protected void ValidateNameT()
+        private void ValidateNameT()
         {
             this._validator.SetArg("Code.NameT", this._dto.NameT)
                 .MaxLength(20);
         }
 
 
-        protected void ValidateContent()
+        private void ValidateContent()
         {
             this._validator.SetArg("Code.Content", this._dto.Content)
                 .MaxLength(50);

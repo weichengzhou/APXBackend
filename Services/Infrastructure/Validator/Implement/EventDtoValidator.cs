@@ -134,7 +134,7 @@ namespace APX.Services.Validator
         }
 
 
-        protected void ValidateCreatedUser()
+        private void ValidateCreatedUser()
         {
             this._validator.SetArg("Event.CreatedUser", this._dto.CreatedUser)
                 .NotNull()
@@ -154,11 +154,11 @@ namespace APX.Services.Validator
         protected override void Validate()
         {
             base.Validate();
-            this.ValidateUpdateUser();
+            this.ValidateUpdatedUser();
         }
 
 
-        protected void ValidateUpdateUser()
+        private void ValidateUpdatedUser()
         {
             this._validator.SetArg("Event.UpdatedUser", this._dto.UpdatedUser)
                 .NotNull()

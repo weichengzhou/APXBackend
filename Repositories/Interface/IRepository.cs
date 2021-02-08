@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 
 namespace APX.Repositories
 {
+    // Define the common method in repositories.
     public interface IRepository<T>
     {
         Task Create(T entity);

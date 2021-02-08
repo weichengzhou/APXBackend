@@ -4,6 +4,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace APX.Models.Context.Mapper
 {
+    /* Usage:
+       CodeKindMapper mapper = new CodeKindMapper(builder);
+       mapper.Map();
+    */
     public class CodeKindMapper : ICodeKindMapper
     {
         private EntityTypeBuilder<CodeKind> _builder;
@@ -14,6 +18,7 @@ namespace APX.Models.Context.Mapper
         }
 
 
+        // Map all fields in CodeKind.
         public void Map()
         {
             this.HasKey();

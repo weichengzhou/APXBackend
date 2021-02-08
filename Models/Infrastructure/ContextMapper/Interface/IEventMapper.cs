@@ -1,6 +1,7 @@
 
 namespace APX.Models.Context.Mapper
 {
+    // Defined the fields in Event which need to mapping.
     public interface IEventMapper : IContextMapper
     {
         void MapSEQ();

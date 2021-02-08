@@ -27,7 +27,7 @@ namespace APX.Services
 
         public async Task<Event> Create(EventDto eventDto)
         {
-            IValidator validator = new CreateEventDtoValidator(eventDto);
+            IValidator validator = ValidatorFactory.CreateDtoValidator(eventDto);
             if(!validator.IsValidated())
                 throw(new InputValidatedError(validator.GetErrors()));
 
@@ -66,7 +66,7 @@ namespace APX.Services
         {
             Event findEvent = await this.FindBySeq(seq);
             eventDto.CreatedUser = findEvent.CreatedUser;
-            IValidator validator = new UpdateEventDtoValidator(eventDto);
+            IValidator validator = ValidatorFactory.UpdateDtoValidator(eventDto);
             if(!validator.IsValidated())
                 throw(new InputValidatedError(validator.GetErrors()));
             

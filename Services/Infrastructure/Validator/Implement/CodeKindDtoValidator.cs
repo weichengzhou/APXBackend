@@ -9,8 +9,8 @@ namespace APX.Services.Validator
 {
     public class CodeKindDtoValidator : AbstractValidator
     {
-        protected CodeKindDto _dto;
-        protected StringValidator _validator;
+        private CodeKindDto _dto;
+        private StringValidator _validator;
 
 
         public CodeKindDtoValidator(CodeKindDto dto)
@@ -33,7 +33,7 @@ namespace APX.Services.Validator
         }
 
 
-        protected void ValidateName()
+        private void ValidateName()
         {
             this._validator.SetArg("CodeKind.Name", this._dto.Name)
                 .NotNull()
@@ -42,7 +42,7 @@ namespace APX.Services.Validator
         }
 
 
-        public void ValidateNameT()
+        private void ValidateNameT()
         {
             this._validator.SetArg("CodeKind.NameT", this._dto.NameT)
                 .MaxLength(20);

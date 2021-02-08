@@ -2,4 +2,5 @@ bin
 obj
 .vscode
 
+*.drawio
 appsettings.json
