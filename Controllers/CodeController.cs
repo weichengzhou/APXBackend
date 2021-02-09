@@ -33,7 +33,7 @@ namespace APXBackend.Controllers
             {
                 Code createdCode = await this._service.Create(codeDto);
                 string message = "Code is created.";
-                return StatusCode(200, new SucceedResponse(message, createdCode));
+                return StatusCode(200, new SucceedResponse<Code>(createdCode, message));
             }
             catch(ServiceError error)
             {
@@ -48,7 +48,8 @@ namespace APXBackend.Controllers
         {
             IEnumerable<Code> allCodes = await this._service.FindAll();
             string message = String.Format("Find {0} records.", allCodes.Count());
-            return StatusCode(200, new SucceedResponse(message, allCodes));
+            return StatusCode(200, new SucceedResponse<IEnumerable<Code>>(
+                allCodes, message));
         }
 
 
@@ -60,7 +61,7 @@ namespace APXBackend.Controllers
             {
                 Code findCode = await this._service.FindById(id);
                 string message = String.Format("Find code id {0}.", id);
-                return StatusCode(200, new SucceedResponse(message, findCode));
+                return StatusCode(200, new SucceedResponse<Code>(findCode, message));
             }
             catch(ServiceError error)
             {
@@ -78,7 +79,7 @@ namespace APXBackend.Controllers
             {
                 Code updatedCode = await this._service.UpdateById(id, codeDto);
                 string message = String.Format("Update code id {0}.", id);
-                return StatusCode(200, new SucceedResponse(message, updatedCode));
+                return StatusCode(200, new SucceedResponse<Code>(updatedCode, message));
             }
             catch(ServiceError error)
             {

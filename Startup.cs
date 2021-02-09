@@ -48,7 +48,6 @@ namespace APXBackend
             // Add AutoMapper : Mapping DTO and Entities
             // dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection
             services.AddAutoMapper(typeof(Startup));
-            services.AddMvc(options => options.EnableEndpointRouting = false);
         }
 
 
@@ -94,7 +93,6 @@ namespace APXBackend
             {
                 app.UseHsts();
             }
-            app.UseMvc();
         }
     }
 }

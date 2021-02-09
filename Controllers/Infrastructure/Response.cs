@@ -11,7 +11,6 @@ namespace APXBackend.Controllers.Response
     {
         bool Success { get; set; }
         string Message { get; set; }
-        object Result { get; set; }
     }
 
 
@@ -26,14 +25,12 @@ namespace APXBackend.Controllers.Response
         public bool Success { get; set; }
 
         public string Message { get; set; }
-
-        public object Result { get; set; }
     }
 
 
-    public class SucceedResponse : IResponse
+    public class SucceedResponse<T> : IResponse
     {
-        public SucceedResponse(string message="", object result=null)
+        public SucceedResponse(T result, string message="")
         {
             this.Success = true;
             this.Message = message;
@@ -44,6 +41,6 @@ namespace APXBackend.Controllers.Response
 
         public string Message { get; set; }
 
-        public object Result { get; set; }
+        public T Result { get; set; }
     }
 }

@@ -33,7 +33,7 @@ namespace APXBackend.Controllers
             {
                 CodeKind createdKind = await this._service.Create(dto);
                 string message = "CodeKind is created.";
-                return StatusCode(200, new SucceedResponse(message, createdKind));
+                return StatusCode(200, new SucceedResponse<CodeKind>(createdKind, message));
             }
             catch(ServiceError error)
             {
@@ -47,7 +47,8 @@ namespace APXBackend.Controllers
         {
             IEnumerable<CodeKind> allKinds = await this._service.FindAll();
             string message = String.Format("Find {0} records.", allKinds.Count());
-            return StatusCode(200, new SucceedResponse(message, allKinds));
+            return StatusCode(200, new SucceedResponse<IEnumerable<CodeKind>>(
+                allKinds, message));
         }
 
         [HttpGet("api/v1.0/codekind/{name}")]
@@ -58,7 +59,7 @@ namespace APXBackend.Controllers
             {
                 CodeKind findKind = await this._service.FindByName(name);
                 string message = String.Format("Find codeKind name {0}.", name);
-                return StatusCode(200, new SucceedResponse(message, findKind));
+                return StatusCode(200, new SucceedResponse<CodeKind>(findKind, message));
             }
             catch(ServiceError error)
             {
@@ -76,7 +77,7 @@ namespace APXBackend.Controllers
             {
                 CodeKind updatedKind = await this._service.UpdateByName(name, dto);
                 string message = String.Format("Update codeKind name {0}.", name);
-                return StatusCode(200, new SucceedResponse(message, updatedKind));
+                return StatusCode(200, new SucceedResponse<CodeKind>(updatedKind, message));
             }
             catch(ServiceError error)
             {

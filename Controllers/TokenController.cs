@@ -35,7 +35,7 @@ namespace APXBackend.Controllers
             {
                 Token createdToken = await this._service.Create(tokenDto);
                 string message = "Token is created.";
-                return StatusCode(200, new SucceedResponse(message, createdToken));
+                return StatusCode(200, new SucceedResponse<Token>(createdToken, message));
             }
             catch(ServiceError error)
             {
@@ -50,7 +50,8 @@ namespace APXBackend.Controllers
         {
             IEnumerable<Token> allTokens = await this._service.FindAll();
             string message = String.Format("Find {0} records.", allTokens.Count());
-            return StatusCode(200, new SucceedResponse(message, allTokens));
+            return StatusCode(200, new SucceedResponse<IEnumerable<Token>>(
+                allTokens, message));
         }
 
 
@@ -62,7 +63,7 @@ namespace APXBackend.Controllers
             {
                 Token findToken = await this._service.FindBySeq(seq);
                 string message = String.Format("Find token seq {0}.", seq);
-                return StatusCode(200, new SucceedResponse(message, findToken));
+                return StatusCode(200, new SucceedResponse<Token>(findToken, message));
             }
             catch(ServiceError error)
             {

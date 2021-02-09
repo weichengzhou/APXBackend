@@ -36,7 +36,7 @@ namespace APXBackend.Controllers
             {
                 Event createdEvent = await this._service.Create(eventDto);
                 string message = "Event is created.";
-                return StatusCode(200, new SucceedResponse(message, createdEvent));
+                return StatusCode(200, new SucceedResponse<Event>(createdEvent, message));
             }
             catch(ServiceError error)
             {
@@ -51,7 +51,8 @@ namespace APXBackend.Controllers
         {
             IEnumerable<Event> allEvents = await this._service.FindAll();
             string message = String.Format("Find {0} records.", allEvents.Count());
-            return StatusCode(200, new SucceedResponse(message, allEvents));
+            return StatusCode(200, new SucceedResponse<IEnumerable<Event>>(
+                allEvents, message));
         }
 
 
@@ -63,7 +64,7 @@ namespace APXBackend.Controllers
             {
                 Event findEvent = await this._service.FindBySeq(seq);
                 string message = String.Format("Find event seq {0}.", seq);
-                return StatusCode(200, new SucceedResponse(message, findEvent));
+                return StatusCode(200, new SucceedResponse<Event>(findEvent, message));
             }
             catch(ServiceError error)
             {
@@ -81,7 +82,7 @@ namespace APXBackend.Controllers
             {
                 Event updatedEvent = await this._service.UpdateBySeq(seq, eventDto);
                 string message = String.Format("Update event seq {0}.", seq);
-                return StatusCode(200, new SucceedResponse(message, updatedEvent));
+                return StatusCode(200, new SucceedResponse<Event>(updatedEvent, message));
             }
             catch(ServiceError error)
             {
