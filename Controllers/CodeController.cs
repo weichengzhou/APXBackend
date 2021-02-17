@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
-using APXBackend.Controllers.Response;
+using APX.Controllers.Response;
 using APX.Models;
 using APX.Models.Dto;
 using APX.Services;
 using APX.Services.Exceptions;
 
-namespace APXBackend.Controllers
+namespace APX.Controllers
 {
     [ApiController]
     public class CodeController : ControllerBase

@@ -5,14 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
-using APXBackend.Controllers.Response;
+using APX.Controllers.Response;
 
 using APX.Models.Dto;
 using APX.Services;
 using APX.Services.Exceptions;
 using APX.Models;
 
-namespace APXBackend.Controllers
+namespace APX.Controllers
 {
     [ApiController]
     public class EventController : ControllerBase

@@ -5,7 +5,7 @@ Message
 Result : API response corresponse object here.
 */
 
-namespace APXBackend.Controllers.Response
+namespace APX.Controllers.Response
 {
     public interface IResponse
     {
