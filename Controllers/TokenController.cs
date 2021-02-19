@@ -79,7 +79,7 @@ namespace APX.Controllers
         {
             try
             {
-                Token findToken = await this._service.FindBySeq(seq);
+                Token findToken = await this._service.FindBySEQ(seq);
                 string message = String.Format("Find Token SEQ {0}.", seq);
                 return StatusCode(200, new SucceedResponse<Token>(findToken, message));
             }

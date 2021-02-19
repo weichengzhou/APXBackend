@@ -22,7 +22,7 @@ namespace APX.Models.Context.Mapper
         {
             this.HasKey();
             this.SetTableName();
-            this.MapId();
+            this.MapID();
             this.MapKind();
             this.MapSortOrder();
             this.MapNameT();
@@ -42,7 +42,7 @@ namespace APX.Models.Context.Mapper
         }
 
 
-        public void MapId()
+        public void MapID()
         {
             this._builder.Property(e => e.ID)
                 .HasColumnName("CODE_ID")

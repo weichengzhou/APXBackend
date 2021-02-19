@@ -16,16 +16,16 @@ namespace APX.Repositories
         }
 
 
-        public async Task<Event> FindBySeq(string seq)
+        public async Task<Event> FindBySEQ(string seq)
         {
             Expression<Func<Event, bool>> isExist = e => e.SEQ.ToString() == seq;
             return await this.FindFirst(isExist);
         }
 
 
-        public async Task<bool> IsExistBySeq(string seq)
+        public async Task<bool> IsExistBySEQ(string seq)
         {
-            return await this.FindBySeq(seq) != null;
+            return await this.FindBySEQ(seq) != null;
         }
     }
 }

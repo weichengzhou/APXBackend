@@ -83,7 +83,7 @@ namespace APX.Controllers
         {
             try
             {
-                Code findCode = await this._service.FindById(id);
+                Code findCode = await this._service.FindByID(id);
                 string message = String.Format("Find Code ID {0}.", id);
                 return StatusCode(200, new SucceedResponse<Code>(findCode, message));
             }
@@ -113,7 +113,7 @@ namespace APX.Controllers
         {
             try
             {
-                Code updatedCode = await this._service.UpdateById(id, codeDto);
+                Code updatedCode = await this._service.UpdateByID(id, codeDto);
                 string message = String.Format("Update Code ID {0}.", id);
                 return StatusCode(200, new SucceedResponse<Code>(updatedCode, message));
             }

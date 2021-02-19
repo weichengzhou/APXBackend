@@ -13,8 +13,8 @@ namespace APX.Services
 
         Task<IEnumerable<Token>> FindAll();
 
-        Task<Token> FindBySeq(string seq);
+        Task<Token> FindBySEQ(string seq);
 
-        Task<bool> IsExistBySeq(string seq);
+        Task<bool> IsExistBySEQ(string seq);
     }
 }

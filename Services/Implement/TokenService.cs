@@ -42,9 +42,9 @@ namespace APX.Services
         }
 
 
-        public async Task<bool> IsExistBySeq(string seq)
+        public async Task<bool> IsExistBySEQ(string seq)
         {
-            return await this._unitOfWork.TokenRepository.IsExistBySeq(seq);
+            return await this._unitOfWork.TokenRepository.IsExistBySEQ(seq);
         }
 
 
@@ -54,11 +54,11 @@ namespace APX.Services
         }
 
 
-        public async Task<Token> FindBySeq(string seq)
+        public async Task<Token> FindBySEQ(string seq)
         {
-            if(!await this.IsExistBySeq(seq))
+            if(!await this.IsExistBySEQ(seq))
                 throw(new TokenNotFoundError(seq));
-            return await this._unitOfWork.TokenRepository.FindBySeq(seq);
+            return await this._unitOfWork.TokenRepository.FindBySEQ(seq);
         }
     }
 }

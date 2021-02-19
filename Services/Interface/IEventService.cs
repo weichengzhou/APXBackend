@@ -13,10 +13,10 @@ namespace APX.Services
 
         Task<IEnumerable<Event>> FindAll();
 
-        Task<Event> FindBySeq(string seq);
+        Task<Event> FindBySEQ(string seq);
 
-        Task<Event> UpdateBySeq(string seq, EventDto parameter);
+        Task<Event> UpdateBySEQ(string seq, EventDto parameter);
 
-        Task<bool> IsExistBySeq(string seq);
+        Task<bool> IsExistBySEQ(string seq);
     }
 }

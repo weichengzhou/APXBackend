@@ -41,9 +41,9 @@ namespace APX.Services
         }
 
 
-        public async Task<bool> IsExistBySeq(string seq)
+        public async Task<bool> IsExistBySEQ(string seq)
         {
-            return await this._unitOfWork.EventRepository.IsExistBySeq(seq);
+            return await this._unitOfWork.EventRepository.IsExistBySEQ(seq);
         }
 
 
@@ -54,17 +54,17 @@ namespace APX.Services
         }
 
 
-        public async Task<Event> FindBySeq(string seq)
+        public async Task<Event> FindBySEQ(string seq)
         {
-            if(!await this.IsExistBySeq(seq))
+            if(!await this.IsExistBySEQ(seq))
                 throw(new EventNotFoundError(seq));
-            return await this._unitOfWork.EventRepository.FindBySeq(seq);
+            return await this._unitOfWork.EventRepository.FindBySEQ(seq);
         }
 
 
-        public async Task<Event> UpdateBySeq(string seq, EventDto eventDto)
+        public async Task<Event> UpdateBySEQ(string seq, EventDto eventDto)
         {
-            Event findEvent = await this.FindBySeq(seq);
+            Event findEvent = await this.FindBySEQ(seq);
             eventDto.CreatedUser = findEvent.CreatedUser;
             IValidator validator = ValidatorFactory.UpdateDtoValidator(eventDto);
             if(!validator.IsValidated())

@@ -29,7 +29,7 @@ namespace APX.Services
             IValidator validator = ValidatorFactory.CreateDtoValidator(codeDto);
             if(!validator.IsValidated())
                 throw(new InputValidatedError(validator.GetErrors()));
-            else if(await this.IsExistById(codeDto.ID))
+            else if(await this.IsExistByID(codeDto.ID))
                 throw(new CodeIsExistError(codeDto.ID));
             else if(!await this._unitOfWork.CodeKindRepository
                 .IsExistByName(codeDto.Kind))
@@ -43,9 +43,9 @@ namespace APX.Services
         }
 
 
-        public async Task<bool> IsExistById(string id)
+        public async Task<bool> IsExistByID(string id)
         {
-            return await this._unitOfWork.CodeRepository.IsExistById(id);
+            return await this._unitOfWork.CodeRepository.IsExistByID(id);
         }
 
 
@@ -55,17 +55,17 @@ namespace APX.Services
         }
 
 
-        public async Task<Code> FindById(string id)
+        public async Task<Code> FindByID(string id)
         {
-            if(!await this.IsExistById(id))
+            if(!await this.IsExistByID(id))
                 throw(new CodeNotFoundError(id));
-            return await this._unitOfWork.CodeRepository.FindById(id);
+            return await this._unitOfWork.CodeRepository.FindByID(id);
         }
 
 
-        public async Task<Code> UpdateById(string id, CodeDto codeDto)
+        public async Task<Code> UpdateByID(string id, CodeDto codeDto)
         {
-            Code findCode = await this.FindById(id);
+            Code findCode = await this.FindByID(id);
             codeDto.ID = id;
             IValidator validator = ValidatorFactory.UpdateDtoValidator(codeDto);
             if(!validator.IsValidated())

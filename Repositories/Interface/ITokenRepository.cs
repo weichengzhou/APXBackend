@@ -7,8 +7,8 @@ namespace APX.Repositories
 {
     public interface ITokenRepository : IRepository<Token>
     {
-        Task<Token> FindBySeq(string seq);
+        Task<Token> FindBySEQ(string seq);
 
-        Task<bool> IsExistBySeq(string seq);
+        Task<bool> IsExistBySEQ(string seq);
     }
 }

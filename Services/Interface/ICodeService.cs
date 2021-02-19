@@ -13,10 +13,10 @@ namespace APX.Services
 
         Task<IEnumerable<Code>> FindAll();
 
-        Task<Code> FindById(string id);
+        Task<Code> FindByID(string id);
 
-        Task<Code> UpdateById(string id, CodeDto codeDto);
+        Task<Code> UpdateByID(string id, CodeDto codeDto);
 
-        Task<bool> IsExistById(string id);
+        Task<bool> IsExistByID(string id);
     }
 }

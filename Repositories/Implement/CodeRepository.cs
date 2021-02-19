@@ -16,16 +16,16 @@ namespace APX.Repositories
         }
 
 
-        public async Task<Code> FindById(string id)
+        public async Task<Code> FindByID(string id)
         {
             Expression<Func<Code, bool>> isExist = c => c.ID == id;
             return await this.FindFirst(isExist);
         }
 
 
-        public async Task<bool> IsExistById(string id)
+        public async Task<bool> IsExistByID(string id)
         {
-            return await this.FindById(id) != null;
+            return await this.FindByID(id) != null;
         }
     }
 }

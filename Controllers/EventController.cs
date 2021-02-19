@@ -81,7 +81,7 @@ namespace APX.Controllers
         {
             try
             {
-                Event findEvent = await this._service.FindBySeq(seq);
+                Event findEvent = await this._service.FindBySEQ(seq);
                 string message = String.Format("Find Event SEQ {0}.", seq);
                 return StatusCode(200, new SucceedResponse<Event>(findEvent, message));
             }
@@ -110,7 +110,7 @@ namespace APX.Controllers
         {
             try
             {
-                Event updatedEvent = await this._service.UpdateBySeq(seq, eventDto);
+                Event updatedEvent = await this._service.UpdateBySEQ(seq, eventDto);
                 string message = String.Format("Update Event SEQ {0}.", seq);
                 return StatusCode(200, new SucceedResponse<Event>(updatedEvent, message));
             }
