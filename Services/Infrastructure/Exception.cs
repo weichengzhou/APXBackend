@@ -90,7 +90,7 @@ namespace APX.Services.Exceptions
         public CodeNotFoundError(string id, string message=null)
         {
             this.ErrorCode = "E06";
-            this._defaultMessage = String.Format("Cannot find Code Id `{0}`.", id);
+            this._defaultMessage = String.Format("Cannot find Code ID `{0}`.", id);
         }
     }
 
@@ -100,7 +100,7 @@ namespace APX.Services.Exceptions
         public CodeIsExistError(string id, string message=null)
         {
             this.ErrorCode = "E07";
-            this._defaultMessage = String.Format("Code Id `{0}` is exist.", id);
+            this._defaultMessage = String.Format("Code ID `{0}` is exist.", id);
         }
     }
 }

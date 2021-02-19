@@ -7,8 +7,8 @@ namespace APX.Repositories
 {
     public interface IEventRepository : IRepository<Event>
     {
-        Task<Event> FindBySeq(string seq);
+        Task<Event> FindBySEQ(string seq);
 
-        Task<bool> IsExistBySeq(string seq);
+        Task<bool> IsExistBySEQ(string seq);
     }
 }

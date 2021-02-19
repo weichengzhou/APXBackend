@@ -7,8 +7,8 @@ namespace APX.Repositories
 {
     public interface ICodeRepository : IRepository<Code>
     {
-        Task<Code> FindById(string id);
+        Task<Code> FindByID(string id);
 
-        Task<bool> IsExistById(string id);
+        Task<bool> IsExistByID(string id);
     }
 }

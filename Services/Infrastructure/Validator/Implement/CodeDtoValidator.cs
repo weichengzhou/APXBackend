@@ -21,7 +21,7 @@ namespace APX.Services.Validator
 
         protected override void Validate()
         {
-            this.ValidateId();
+            this.ValidateID();
             this.ValidateKind();
             this.ValidateSortOrder();
             this.ValidateNameT();
@@ -35,9 +35,9 @@ namespace APX.Services.Validator
         }
 
 
-        private void ValidateId()
+        private void ValidateID()
         {
-            this._validator.SetArg("Code.Id", this._dto.ID)
+            this._validator.SetArg("Code.ID", this._dto.ID)
                 .NotNull()
                 .NotBlank().
                 MaxLength(20);
