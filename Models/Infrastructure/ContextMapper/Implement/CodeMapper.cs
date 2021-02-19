@@ -32,7 +32,7 @@ namespace APX.Models.Context.Mapper
 
         public void HasKey()
         {
-            this._builder.HasKey(e => e.Id);
+            this._builder.HasKey(e => e.ID);
         }
 
 
@@ -44,7 +44,7 @@ namespace APX.Models.Context.Mapper
 
         public void MapId()
         {
-            this._builder.Property(e => e.Id)
+            this._builder.Property(e => e.ID)
                 .HasColumnName("CODE_ID")
                 .HasMaxLength(3)
                 .IsRequired();

@@ -37,7 +37,7 @@ namespace APX.Services.Validator
 
         private void ValidateId()
         {
-            this._validator.SetArg("Code.Id", this._dto.Id)
+            this._validator.SetArg("Code.Id", this._dto.ID)
                 .NotNull()
                 .NotBlank().
                 MaxLength(20);

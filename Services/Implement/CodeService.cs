@@ -29,8 +29,8 @@ namespace APX.Services
             IValidator validator = ValidatorFactory.CreateDtoValidator(codeDto);
             if(!validator.IsValidated())
                 throw(new InputValidatedError(validator.GetErrors()));
-            else if(await this.IsExistById(codeDto.Id))
-                throw(new CodeIsExistError(codeDto.Id));
+            else if(await this.IsExistById(codeDto.ID))
+                throw(new CodeIsExistError(codeDto.ID));
             else if(!await this._unitOfWork.CodeKindRepository
                 .IsExistByName(codeDto.Kind))
                 throw(new CodeKindNotFoundError(codeDto.Kind));
@@ -66,7 +66,7 @@ namespace APX.Services
         public async Task<Code> UpdateById(string id, CodeDto codeDto)
         {
             Code findCode = await this.FindById(id);
-            codeDto.Id = id;
+            codeDto.ID = id;
             IValidator validator = ValidatorFactory.UpdateDtoValidator(codeDto);
             if(!validator.IsValidated())
                 throw(new InputValidatedError(validator.GetErrors()));

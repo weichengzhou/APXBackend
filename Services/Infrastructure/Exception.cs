@@ -1,5 +1,6 @@
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 using Validator.Fluent;
@@ -38,8 +39,8 @@ namespace APX.Services.Exceptions
         public InputValidatedError(List<ValidationError> errors, string message=null)
         {
             this.ErrorCode = "E01";
-            foreach(ValidationError error in errors)
-                this._defaultMessage += error.Message + "<br>";
+            this._defaultMessage = String.Join(
+                "<br>", errors.Select(e => e.Message));
         }
     }
 
@@ -49,7 +50,7 @@ namespace APX.Services.Exceptions
         public EventNotFoundError(string seq, string message=null)
         {
             this.ErrorCode = "E02";
-            this._defaultMessage = String.Format("Cannot find event seq `{0}`.", seq);
+            this._defaultMessage = String.Format("Cannot find Event Seq `{0}`.", seq);
         }
     }
 
@@ -59,7 +60,7 @@ namespace APX.Services.Exceptions
         public TokenNotFoundError(string seq, string message=null)
         {
             this.ErrorCode = "E03";
-            this._defaultMessage = String.Format("Cannot find token seq `{0}`.", seq);
+            this._defaultMessage = String.Format("Cannot find Token Seq `{0}`.", seq);
         }
     }
 
@@ -69,7 +70,7 @@ namespace APX.Services.Exceptions
         public CodeKindNotFoundError(string name, string message=null)
         {
             this.ErrorCode = "E04";
-            this._defaultMessage = String.Format("Cannot find codeKind name `{0}`.", name);
+            this._defaultMessage = String.Format("Cannot find CodeKind Name `{0}`.", name);
         }
     }
 
@@ -79,7 +80,7 @@ namespace APX.Services.Exceptions
         public CodeKindIsExistError(string name, string message=null)
         {
             this.ErrorCode = "E05";
-            this._defaultMessage = String.Format("Codekind name `{0}` is exist.", name);
+            this._defaultMessage = String.Format("Codekind Name `{0}` is exist.", name);
         }
     }
 
@@ -89,7 +90,7 @@ namespace APX.Services.Exceptions
         public CodeNotFoundError(string id, string message=null)
         {
             this.ErrorCode = "E06";
-            this._defaultMessage = String.Format("Cannot find code id `{0}`.", id);
+            this._defaultMessage = String.Format("Cannot find Code Id `{0}`.", id);
         }
     }
 
@@ -99,7 +100,7 @@ namespace APX.Services.Exceptions
         public CodeIsExistError(string id, string message=null)
         {
             this.ErrorCode = "E07";
-            this._defaultMessage = String.Format("Code id `{0}` is exist.", id);
+            this._defaultMessage = String.Format("Code Id `{0}` is exist.", id);
         }
     }
 }

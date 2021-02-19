@@ -1,10 +1,14 @@
 
+using System;
+using System.IO;
+using System.Reflection;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Filters;
 
 using AutoMapper;
 
@@ -14,6 +18,7 @@ using APX.Repositories;
 using APX.Services;
 using APX.Services.UnitOfWork;
 using APX.Controllers.Converter.JSON;
+using APX.Swagger.Example;
 
 namespace APXBackend
 {
@@ -48,6 +53,8 @@ namespace APXBackend
             // Add AutoMapper : Mapping DTO and Entities
             // dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection
             services.AddAutoMapper(typeof(Startup));
+            this.AddSwagger(services);
+            this.DisableModelValidation(services);
         }
 
 
@@ -82,17 +89,61 @@ namespace APXBackend
         }
 
 
+        private void AddSwagger(IServiceCollection services)
+        {
+            services.AddSwaggerGen(c => {
+                // Use swagger example.
+                c.ExampleFilters();
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
+            services.AddSwaggerExamplesFromAssemblyOf<ErrorResponseExample>();
+            this.AddSwaggerCodeExample(services);
+            this.AddSwaggerCodeKindExample(services);
+        }
+
+
+        private void AddSwaggerCodeExample(IServiceCollection services)
+        {
+            services.AddSwaggerExamplesFromAssemblyOf<CreateCodeResponseExample>();
+            services.AddSwaggerExamplesFromAssemblyOf<GetCodesResponseExample>();
+            services.AddSwaggerExamplesFromAssemblyOf<GetCodeResponseExample>();
+            services.AddSwaggerExamplesFromAssemblyOf<UpdateCodeResponseExample>();
+        }
+
+
+        private void AddSwaggerCodeKindExample(IServiceCollection services)
+        {
+            services.AddSwaggerExamplesFromAssemblyOf<CreateCodeKindResponseExample>();
+            services.AddSwaggerExamplesFromAssemblyOf<GetCodeKindsResponseExample>();
+        }
+
+
+        private void DisableModelValidation(IServiceCollection services)
+        {
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
+        }
+
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
             {
-                app.UseDeveloperExceptionPage();
-            }
-            else
+                c.SwaggerEndpoint("v1/swagger.json", "APX API");
+                c.DefaultModelsExpandDepth(-1);
+            });
+
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
             {
-                app.UseHsts();
-            }
+                endpoints.MapControllers();
+            });
         }
     }
 }

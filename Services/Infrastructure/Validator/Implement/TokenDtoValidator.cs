@@ -33,7 +33,8 @@ namespace APX.Services.Validator
         protected void ValidateBody()
         {
             this._validator.SetArg("Token.Body", this._dto.Body)
-                .NotNull();
+                .NotNull()
+                .NotBlank();
         }
     }
 
