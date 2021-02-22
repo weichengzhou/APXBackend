@@ -99,26 +99,8 @@ namespace APXBackend
                 c.IncludeXmlComments(xmlPath);
             });
             services.AddSwaggerExamplesFromAssemblyOf<ErrorResponseExample>();
-            this.AddSwaggerCodeExample(services);
-            this.AddSwaggerCodeKindExample(services);
         }
-
-
-        private void AddSwaggerCodeExample(IServiceCollection services)
-        {
-            services.AddSwaggerExamplesFromAssemblyOf<CreateCodeResponseExample>();
-            services.AddSwaggerExamplesFromAssemblyOf<GetCodesResponseExample>();
-            services.AddSwaggerExamplesFromAssemblyOf<GetCodeResponseExample>();
-            services.AddSwaggerExamplesFromAssemblyOf<UpdateCodeResponseExample>();
-        }
-
-
-        private void AddSwaggerCodeKindExample(IServiceCollection services)
-        {
-            services.AddSwaggerExamplesFromAssemblyOf<CreateCodeKindResponseExample>();
-            services.AddSwaggerExamplesFromAssemblyOf<GetCodeKindsResponseExample>();
-        }
-
+        
 
         private void DisableModelValidation(IServiceCollection services)
         {
