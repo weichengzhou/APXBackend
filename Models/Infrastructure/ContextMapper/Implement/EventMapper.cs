@@ -5,8 +5,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace APX.Models.Context.Mapper
 {
     /* Usage:
-       EventMapper mapper = new EventMapper(builder);
-       mapper.Map();
+    |  EventMapper mapper = new EventMapper(builder);
+    |  mapper.Map();
     */
     public class EventMapper : IEventMapper
     {

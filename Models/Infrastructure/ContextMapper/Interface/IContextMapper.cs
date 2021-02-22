@@ -4,13 +4,13 @@ namespace APX.Models.Context.Mapper
     // Interface: Dbcontext mapper.
     public interface IContextMapper
     {
-        // Mapping all fields in table.
+        // Maps model into table.
         void Map();
 
-        // Set the primary key of table.
+        // Defines the key of table.
         void HasKey();
 
-        // Set the name of table in database.
+        // Defines the name of table.
         void SetTableName();
     }
 }

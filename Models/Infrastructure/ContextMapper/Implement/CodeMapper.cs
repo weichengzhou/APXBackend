@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace APX.Models.Context.Mapper
 {
     /* Usage:
-       CodeMapper mapper = new CodeMapper(builder);
-       mapper.Map();
+    |  CodeMapper mapper = new CodeMapper(builder);
+    |  mapper.Map();
     */
     public class CodeMapper : ICodeMapper
     {

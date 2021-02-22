@@ -39,6 +39,13 @@ namespace APX.Services.Validator
     }
 
 
+    /* Usage:
+    |  using Validator.Fluent;
+    |
+    |  CreateTokenDtoValidator validator = new CreateTokenDtoValidator(dto);
+    |  bool isValidated = validator.IsValidated();
+    |  List<ValidationError> errors = validator.GetErrors();
+    */
     public class CreateTokenDtoValidator : TokenDtoValidator
     {
         public CreateTokenDtoValidator(TokenDto dto) : base(dto)
@@ -63,6 +70,13 @@ namespace APX.Services.Validator
     }
 
 
+    /* Usage:
+    |  using Validator.Fluent;
+    |
+    |  UpdateTokenDtoValidator validator = new UpdateTokenDtoValidator(dto);
+    |  bool isValidated = validator.IsValidated();
+    |  List<ValidationError> errors = validator.GetErrors();
+    */
     public class UpdateTokenDtoValidator : TokenDtoValidator
     {
         public UpdateTokenDtoValidator(TokenDto dto) : base(dto)

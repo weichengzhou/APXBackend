@@ -9,6 +9,11 @@ namespace APX.Models.Context
     {
         public APXContext(DbContextOptions options) : base(options){}
 
+
+        /* Uses Mapper to build model.
+        |  Factory gives Mapper by entity of ModelBuilder,
+        |  and call Map to build it.
+        */
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             MapperFactory.CreateMapper(modelBuilder.Entity<Code>()).Map();

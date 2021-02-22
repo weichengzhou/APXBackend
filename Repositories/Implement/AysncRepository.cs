@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace APX.Repositories
 {
-    // Implement the method of IRepository.
+    // Implements the common method of IRepository.
     public class AsyncRepository<T> : IRepository<T> where T : class
     {
         private DbContext _context;

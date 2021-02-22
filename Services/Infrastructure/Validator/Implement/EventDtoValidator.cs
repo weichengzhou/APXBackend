@@ -7,6 +7,13 @@ using Validator.Fluent;
 
 namespace APX.Services.Validator
 {
+    /* Usage:
+    |  using Validator.Fluent;
+    |
+    |  EventDtoValidator validator = new EventDtoValidator(dto);
+    |  bool isValidated = validator.IsValidated();
+    |  List<ValidationError> errors = validator.GetErrors();
+    */
     public class EventDtoValidator : AbstractValidator
     {
         protected EventDto _dto;

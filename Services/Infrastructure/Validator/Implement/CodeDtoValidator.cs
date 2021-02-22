@@ -7,6 +7,13 @@ using Validator.Fluent;
 
 namespace APX.Services.Validator
 {
+    /* Usage:
+    |  using Validator.Fluent;
+    |
+    |  CodeDtoValidator validator = new CodeDtoValidator(dto);
+    |  bool isValidated = validator.IsValidated();
+    |  List<ValidationError> errors = validator.GetErrors();
+    */
     public class CodeDtoValidator : AbstractValidator
     {
         private CodeDto _dto;
