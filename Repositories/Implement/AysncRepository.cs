@@ -24,6 +24,7 @@ namespace APX.Repositories
             await this._context.Set<T>().AddAsync(entity);
         }
 
+
         public async Task<T> FindFirst(Expression<Func<T, bool>> predicate)
         {
             return await this._context.Set<T>()
@@ -31,6 +32,7 @@ namespace APX.Repositories
                 .FirstOrDefaultAsync();
         }
         
+
         public async Task<IEnumerable<T>> Find(Expression<Func<T, bool>> predicate)
         {
             return await this._context.Set<T>()
@@ -38,15 +40,18 @@ namespace APX.Repositories
                 .ToListAsync();
         }
 
+
         public async Task<IEnumerable<T>> FindAll()
         {
             return await this._context.Set<T>().ToListAsync();
         }
 
+
         public void Update(T entity)
         {
             this._context.Set<T>().Update(entity);
         }
+
 
         public void Remove(T entity)
         {

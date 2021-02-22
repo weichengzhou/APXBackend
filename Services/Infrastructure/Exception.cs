@@ -50,7 +50,7 @@ namespace APX.Services.Exceptions
         public EventNotFoundError(string seq, string message=null)
         {
             this.ErrorCode = "E02";
-            this._defaultMessage = String.Format("Cannot find Event Seq `{0}`.", seq);
+            this._defaultMessage = String.Format("Cannot find Event SEQ `{0}`.", seq);
         }
     }
 
@@ -60,7 +60,7 @@ namespace APX.Services.Exceptions
         public TokenNotFoundError(string seq, string message=null)
         {
             this.ErrorCode = "E03";
-            this._defaultMessage = String.Format("Cannot find Token Seq `{0}`.", seq);
+            this._defaultMessage = String.Format("Cannot find Token SEQ `{0}`.", seq);
         }
     }
 
